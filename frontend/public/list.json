@@ -1,61 +1,52 @@
-
 [
-    {
-      "id": 1,
-      "name": "video",
-      "title": "Hindu Law",
-      "price": "0",
-      "category": "Free",
-      "image": "https://i.ytimg.com/vi/9IVknKmKPYg/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCtzuyrlUSoMJ5LW9ImvChn2zGsuQ"
-    },
+  {
+    "name": "To Kill a Mockingbird",
+    "price": 0,
+    "category": "Free",
+    "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
+    "title": "A novel by Harper Lee published in 1960."
+  },
+  {
+    "name": "1984",
+    "price": 399,
+    "category": "Free",
+    "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
+    "title": "A novel by George Orwell, depicting a totalitarian society."
+  },
+  {
+    "name": "Pride and Prejudice",
+    "price": 350,
+    "category": "Free",
+    "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
+    "title": "A novel by Jane Austen that critiques the British landed gentry."
+  },
+  {
+    "name": "1984",
+    "price": 399,
+    "category": "Free",
+    "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
+    "title": "A novel by George Orwell, depicting a totalitarian society."
+  },
+  {
+    "name": "Pride and Prejudice",
+    "price": 350,
+    "category": "Free",
+    "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
+    "title": "A novel by Jane Austen that critiques the British landed gentry."
+  },
+  {
+    "name": "1984",
+    "price": 399,
+    "category": "Free",
+    "image": "https://m.media-amazon.com/images/I/71XEsXS5RlL._AC_UY218_.jpg",
+    "title": "A novel by George Orwell, depicting a totalitarian society."
+  },
+  {
+    "name": "Pride and Prejudice",
+    "price": 350,
+    "category": "Free",
+    "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
+    "title": "A novel by Jane Austen that critiques the British landed gentry."
+  }
   
-    {
-      "id": 2,
-      "name": "video",
-      "title": "Hindu Law",
-      "price": "0",
-      "category": "Free",
-      "image": "https://i.ytimg.com/vi/WJLhBo8VVFc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD4qejWXKB3qv89Ap8yfAXoFUvarg"
-    },
-    {
-      "id": 3,
-      "name": "video",
-      "title": "Hindu Law",
-      "price": "0",
-      "category": "Free",
-      "image": "https://i.ytimg.com/vi/WJLhBo8VVFc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD4qejWXKB3qv89Ap8yfAXoFUvarg"
-    },
-    {
-      "id": 4,
-      "name": "video",
-      "title": "Hindu Law",
-      "price": "0",
-      "category": "Free",
-      "image": "https://i.ytimg.com/vi/WJLhBo8VVFc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD4qejWXKB3qv89Ap8yfAXoFUvarg"
-    },
-    {
-      "id": 5,
-      "name": "video",
-      "title": "Hindu Law",
-      "price": "0",
-      "category": "Free",
-      "image": "https://i.ytimg.com/vi/JO4j2gLwa-A/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAjNiEM-gzjhxwgamTw-jC-Qc8xSQ"
-    },
-    {
-      "id": 6,
-      "name": "video",
-      "title": "Hindu Law",
-      "price": "0",
-      "category": "Free",
-      "image": "https://i.ytimg.com/vi/JO4j2gLwa-A/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAjNiEM-gzjhxwgamTw-jC-Qc8xSQ"
-    },
-    {
-      "id": 7,
-      "name": "video",
-      "title": "Hindu Law",
-      "price": "0",
-      "category": "Free",
-      "image": "https://i.ytimg.com/vi/JO4j2gLwa-A/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAjNiEM-gzjhxwgamTw-jC-Qc8xSQ"
-    }
-  ]
-  
+]

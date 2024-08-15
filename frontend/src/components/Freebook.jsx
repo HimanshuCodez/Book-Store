@@ -10,12 +10,13 @@ function Freebook() {
   
 
   var settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    initialSlide: 0,
+     dots: true,             // Show navigation dots
+        infinite: true,         // Infinite loop sliding
+        speed: 500,             // Slide transition speed (ms)
+        slidesToShow: 4,        // Number of cards to show at once
+        slidesToScroll: 1,      // Number of cards to scroll at once
+        autoplay: true,         // Enable automatic sliding
+        autoplaySpeed: 1500,  
     responsive: [
       {
         breakpoint: 1024,
