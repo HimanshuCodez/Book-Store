@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Login from './Login'
 const Navbar = () => {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`   max-w-screen-2xl container mx-auto md:px-20 px-4 dark:bg-slate-800 dark:text-white fixed top-0 left-0 right-0 z-50 ${
+        className={`   max-w-screen-2xl font-bold container mx-auto md:px-20 px-4 dark:bg-slate-800 dark:text-white fixed top-0 left-0 right-0 z-50 ${
           sticky
             ? "sticky-navbar shadow-md bg-slate-100 duration-300 on-800 transition-all ease-in-out"
             : ""
@@ -85,7 +85,7 @@ const Navbar = () => {
                 {navItems}
               </ul>
             </div>
-            <a className=" text-2xl font-bold cursor-pointer ">Book Store</a>
+            <a className=" text-2xl mx-50 font-bold cursor-pointer ">Bookish</a>
           </div>
           <div className="navbar-end space-x-3">
             <div className="navbar-center hidden lg:flex">
@@ -95,7 +95,7 @@ const Navbar = () => {
               <label className="px-3 py-2 border rounded-md flex items-center gap-2">
                 <input
                   type="text"
-                  className="grow  outline-none"
+                  className="grow  outline-none dark:bg-slate-900 dark:text-white"
                   placeholder="Search"
                 />
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ">
@@ -135,12 +135,22 @@ const Navbar = () => {
                 <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
               </svg>
             </label>
-            <a className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer">
+            <a className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer" onClick={()=>document.getElementById("my_modal_3").showModal()}>
               Login
             </a>
+            <Login/>
+            <div className="avatar ">
+            <div className="w-12 rounded-full ">
+              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            </div>
           </div>
+          </div>
+         
+        
         </div>
+        
       </div>
+      
     </>
   );
 };

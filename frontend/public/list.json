@@ -4,49 +4,48 @@
     "price": 0,
     "category": "Free",
     "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
-    "title": "A novel by Harper Lee published in 1960."
+    "title": "A novel by Harper Lee"
   },
   {
     "name": "1984",
     "price": 399,
     "category": "Free",
     "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
-    "title": "A novel by George Orwell, depicting a totalitarian society."
+    "title": "A novel by George Orwell."
   },
   {
     "name": "Pride and Prejudice",
     "price": 350,
     "category": "Free",
     "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
-    "title": "A novel by Jane Austen that critiques the British landed gentry."
+    "title": "A novel by Jane Austen ."
   },
   {
     "name": "1984",
     "price": 399,
     "category": "Free",
     "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
-    "title": "A novel by George Orwell, depicting a totalitarian society."
+    "title": "A novel by George Orwell"
   },
   {
     "name": "Pride and Prejudice",
     "price": 350,
     "category": "Free",
     "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
-    "title": "A novel by Jane Austen that critiques the British landed gentry."
+    "title": "A novel by Jane Austen"
   },
   {
     "name": "1984",
     "price": 399,
     "category": "Free",
     "image": "https://m.media-amazon.com/images/I/71XEsXS5RlL._AC_UY218_.jpg",
-    "title": "A novel by George Orwell, depicting a totalitarian society."
+    "title": "A novel by George Orwell"
   },
   {
     "name": "Pride and Prejudice",
     "price": 350,
     "category": "Free",
     "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg",
-    "title": "A novel by Jane Austen that critiques the British landed gentry."
+    "title": "A novel by Jane Austen "
   }
-  
 ]

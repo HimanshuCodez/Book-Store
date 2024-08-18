@@ -15,7 +15,11 @@ export const signup = async (req, res) => {
                 password: hashPassword,
             })
         await createdUser.save()
-        res.status(201).json({ messsage: "User created" })
+        res.status(201).json({ messsage: "User created",user:{
+            _id: createdUser._id,
+            fullname:createdUser.fullname,
+            email: createdUser.email,
+        }, });
     } catch (error) {
         console.log("user creation error", error)
         res.status(500).json({ message: "signup error" })
