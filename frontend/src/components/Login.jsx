@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 function Login() {
-  
   const {
     register,
     handleSubmit,
@@ -23,9 +22,10 @@ function Login() {
         if (res.data) {
           toast.success("Loggedin Successfully");
           document.getElementById("my_modal_3").close();
-
-
-          localStorage.setItem("Users", JSON.stringify(res.data.user));
+          setTimeout(() => {
+            window.location.reload();
+            localStorage.setItem("Users", JSON.stringify(res.data.user));
+          }, 1000);
         }
       })
       .catch((err) => {
