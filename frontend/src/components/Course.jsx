@@ -2,6 +2,7 @@ import React from 'react'
 import list from '../../public/list.json'
 import Cards from './Cards'
 import {Link} from 'react-router-dom'
+import list2 from "../../public/list2.json"
 const Course = (item) => {
 
   return (
@@ -22,7 +23,7 @@ const Course = (item) => {
             </Link>
         </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-4">
-          {list.map((item) => (
+          {list2.map((item) => (
             <Cards key={item.id} item={item} />
           ))}
         </div>
