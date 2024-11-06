@@ -5,6 +5,7 @@ import Slider from "react-slick";
 
 import axios from "axios";
 import Cards from "./Cards";
+import Loader from "./Loader/Loader";
 const  RecentlyAdded = ()=> {
   
   const [Data, setData] = useState();
@@ -63,6 +64,7 @@ const  RecentlyAdded = ()=> {
         </div>
 
         <div>
+            {!Data && <div className=" flex items-center justify-center my-8"> <Loader/> </div>}
           <Slider {...settings}>
             {Data && Data.map((item,i) => (
               <div key={i}>

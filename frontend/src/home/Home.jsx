@@ -2,14 +2,14 @@ import React from "react";
 import Navbar from '../components/Navbar'
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
-import Freebook from '../components/Freebook'
+import RecentlyAdded from '../components/RecentlyAdded'
 
 const Home = () => {
   return (
     <>
       <Navbar />
       <Banner />
-      <Freebook />
+      <RecentlyAdded/>
       <Footer />
     </>
   );

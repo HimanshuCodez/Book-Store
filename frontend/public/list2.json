@@ -4,7 +4,7 @@
       "name": "The Art of being Alone",
       "price": 0,
       "category": "Paid",
-      "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg"
+      "url": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg"
       
     },
     
@@ -12,43 +12,45 @@
       "name": "Day Dream",
       "price": 0,
       "category": "Paid",
-      "image": "https://m.media-amazon.com/images/I/41sbXl-+lZL.AC_SX250.jpg",
+      "url": "https://m.media-amazon.com/images/I/41sbXl-+lZL.AC_SX250.jpg",
       "title": "A novel by George Orwell"
     },
     {
       "name": "Dopamine Detox",
       "price": 399,
       "category": "Paid",
-      "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg"
+      "url": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg"
       
     },
     {
       "name": "Metamorphsis",
       "price": 0,
       "category": "Paid",
-      "image": "https://m.media-amazon.com/images/I/61Le4Mn1AYL._AC._SR360,460.jpg",
+      "url": "https://m.media-amazon.com/images/I/61Le4Mn1AYL._AC._SR360,460.jpg",
       "title": "A novel by George Orwell"
     },
     {
       "name": "Let's talk Money",
       "price": 399,
       "category": "Paid",
-      "image": "https://m.media-amazon.com/images/I/81poW7COQXL._AC._SR360,460.jpg"
+      "url": "https://m.media-amazon.com/images/I/81poW7COQXL._AC._SR360,460.jpg",
+      "title":"by George Orwell"
    
     },
     {
       "name": "Think and grow rich",
       "price": 399,
       "category": "Paid",
-      "image": "https://m.media-amazon.com/images/I/61B84NiWabL._AC._SR360,460.jpg"
+      "url": "https://m.media-amazon.com/images/I/61B84NiWabL._AC._SR360,460.jpg",
+      "title":"by George Orwell"
       
     },
     {
       "name": "1984",
       "price": 399,
       "category": "Paid",
-      "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
-      "title": "A novel by George Orwell"
+      "url": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
+      "title":"by George Orwell"
     },
     
  
@@ -56,7 +58,7 @@
           "name": "The Art of being Alone",
           "price": 0,
           "category": "Paid",
-          "image": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg"
+          "url": "https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg"
           
         },
         
@@ -64,42 +66,42 @@
           "name": "Day Dream",
           "price": 0,
           "category": "Paid",
-          "image": "https://m.media-amazon.com/images/I/41sbXl-+lZL.AC_SX250.jpg",
+          "url": "https://m.media-amazon.com/images/I/41sbXl-+lZL.AC_SX250.jpg",
           "title": "A novel by George Orwell"
         },
         {
           "name": "Dopamine Detox",
           "price": 399,
           "category": "Paid",
-          "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg"
+          "url": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg"
           
         },
         {
           "name": "Metamorphsis",
           "price": 0,
           "category": "Paid",
-          "image": "https://m.media-amazon.com/images/I/61Le4Mn1AYL._AC._SR360,460.jpg",
+          "url": "https://m.media-amazon.com/images/I/61Le4Mn1AYL._AC._SR360,460.jpg",
           "title": "A novel by George Orwell"
         },
         {
           "name": "Let's talk Money",
           "price": 399,
           "category": "Paid",
-          "image": "https://m.media-amazon.com/images/I/81poW7COQXL._AC._SR360,460.jpg"
+          "url": "https://m.media-amazon.com/images/I/81poW7COQXL._AC._SR360,460.jpg"
        
         },
         {
           "name": "Think and grow rich",
           "price": 399,
           "category": "Paid",
-          "image": "https://m.media-amazon.com/images/I/61B84NiWabL._AC._SR360,460.jpg"
+          "url": "https://m.media-amazon.com/images/I/61B84NiWabL._AC._SR360,460.jpg"
           
         },
         {
           "name": "1984",
           "price": 399,
           "category": "Paid",
-          "image": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
+          "url": "https://m.media-amazon.com/images/I/712K3sdLlRL._SY425_.jpg",
           "title": "A novel by George Orwell"
         }
        

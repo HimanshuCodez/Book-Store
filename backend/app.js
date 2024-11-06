@@ -1,12 +1,17 @@
+import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
+
+
 import mongoose from 'mongoose';
 import userRoute from "./routes/user.routes.js"
 import bookRoute from './routes/book.routes.js'
 import favouriteRoute from './routes/favourite.routes.js'
 import cartRoute from './routes/cart.routes.js'
 import orderRoute from './routes/order.routes.js'
+
 const app = express();
+app.use(cors())
 dotenv.config()
 
  const PORT = process.env.PORT || 1000

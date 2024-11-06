@@ -1,24 +1,28 @@
 import React from "react";
 import Home from "./home/Home";
-import { Navigate, Route, Routes } from "react-router-dom";
-import Courses from "./courses/Courses";
+import { Route, Routes } from "react-router-dom";
+import AllBooks from "./components/AllBooks";
 import Signup from "./components/Signup";
 import { Toaster } from "react-hot-toast";
-import { useAuth } from "./context/AuthProvider";
+import Login from "./components/Login";
+import Cart from "./components/Cart";
+import Profile from "./components/Profile";
+import RecentlyAdded from "./components/RecentlyAdded";
+import BookDetails from "./components/ViewBookDeatails/BookDetails";
 
 function App() {
-  const [authUser, setAuthUser] = useAuth();
-  console.log(authUser);
   return (
     <>
       <div className="dark:bg-slate-900 dark:text-white">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/course"
-            element={authUser ? <Courses /> : <Navigate to="/signup" />}
-          />
+          <Route path="/get-all-books" element={<AllBooks />} />
+          <Route path="/recently-added" element={<RecentlyAdded/>} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/view-book-details/:id" element={<BookDetails />} />
         </Routes>
         <Toaster />
       </div>
