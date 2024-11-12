@@ -17,11 +17,10 @@ const authSlice = createSlice({
         },
         changeRole (state, action){
             state.role = action.payload;
-            state.role =role;
+            
         }
     }
 })
 
-export const authActions = authSlice.authActions;
-
-export default authSlice.reducer; 
+export const authActions = authSlice.actions;
+export default authSlice.reducer;

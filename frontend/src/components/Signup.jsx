@@ -140,11 +140,7 @@ function Signup() {
       </div>
 
       {/* Login Modal */}
-      <div id="my_modal_3" className="modal">
-        <div className="modal-box">
-          <Login /> {/* Assuming the login modal component */}
-        </div>
-      </div>
+      
     </div>
   );
 }

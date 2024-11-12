@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Login from "./Login";
 import Logout from "./Logout";
-import Signup from "./Signup";
-import { useSelector } from "react-redux";
+
 
 const Navbar = () => {
   const [theme, setTheme] = useState(
@@ -46,11 +47,7 @@ const Navbar = () => {
       <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost lg:hidden"
-            >
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -70,7 +67,6 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              {/* Navigation items for mobile */}
               <li>
                 <a href="/">Home</a>
               </li>
@@ -89,7 +85,9 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          <a className="text-2xl mx-50 font-bold cursor-pointer">Bookish</a>
+          <Link to="/" className="text-2xl mx-50 font-bold cursor-pointer">
+            Bookish
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -137,26 +135,37 @@ const Navbar = () => {
           </button>
 
           {/* Login/Logout Button */}
-          {isLoggedIn ? (
-            <Logout />
-          ) : (
-            <div>
-              <a
+          {isLoggedIn === false && (
+            <div className="flex space-x-3">
+              <Link
+                to="/sign-in"
                 className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
-                onClick={() => document.getElementById("my_modal_3").showModal()}
               >
                 Login
-              </a>
-              <Login />
+              
+              </Link>
+              <Link
+                to="/sign-up"
+                className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
+              >
+                Signup
+               
+              </Link>
             </div>
           )}
 
           {/* User Avatar */}
-          <div className="avatar">
-            <div className="w-12 rounded-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User Avatar" />
+          {isLoggedIn && (
+            
+            <div className="avatar">
+              <div className="w-12 rounded-full">
+                <img
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  alt="User Avatar"
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
