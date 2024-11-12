@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import RecentlyAdded from "./components/RecentlyAdded";
 import BookDetails from "./components/ViewBookDeatails/BookDetails";
 import { useSelector, useDispatch } from "react-redux";
+import { authActions } from './store/auth';
 
 
 const App = () => {

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Login from "./Login";
 import Logout from "./Logout";
-
+import { authActions } from "../store/auth"; // Assuming you have an auth slice for Redux actions
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
+    localStorage.getItem("theme") || "light"
   );
   const element = document.documentElement;
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // Get login state
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   // Theme toggle function
   const toggleTheme = () => {
@@ -47,7 +48,7 @@ const Navbar = () => {
       <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <button tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -62,30 +63,22 @@ const Navbar = () => {
                   d="M4 6h16M4 12h8m-8 6h16"
                 />
               </svg>
-            </div>
+            </button>
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/get-all-books">Buy Books</a>
-              </li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/get-all-books">All Books</Link></li>
               {isLoggedIn && (
                 <>
-                  <li>
-                    <a>Contact</a>
-                  </li>
-                  <li>
-                    <a>About</a>
-                  </li>
+                  <li><Link to="/cart">Cart</Link></li>
+                  <li><Link to="/about">About</Link></li>
                 </>
               )}
             </ul>
           </div>
-          <Link to="/" className="text-2xl mx-50 font-bold cursor-pointer">
+          <Link to="/" className="text-2xl font-bold cursor-pointer">
             Bookish
           </Link>
         </div>
@@ -94,20 +87,12 @@ const Navbar = () => {
         <div className="navbar-end space-x-3">
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/get-all-books">Buy Books</a>
-              </li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/get-all-books">All Books</Link></li>
               {isLoggedIn && (
                 <>
-                  <li>
-                    <a>Contact</a>
-                  </li>
-                  <li>
-                    <a>About</a>
-                  </li>
+                  <li><Link to="/cart">Cart</Link></li>
+                  <li><Link to="/about">About</Link></li>
                 </>
               )}
             </ul>
@@ -115,7 +100,6 @@ const Navbar = () => {
 
           {/* Theme Toggle Icon */}
           <button onClick={toggleTheme} className="swap swap-rotate">
-            {/* Sun icon for light theme */}
             <svg
               className={`h-7 w-7 fill-current ${theme === "dark" ? "swap-on" : "swap-off"}`}
               xmlns="http://www.w3.org/2000/svg"
@@ -123,8 +107,6 @@ const Navbar = () => {
             >
               <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
             </svg>
-
-            {/* Moon icon for dark theme */}
             <svg
               className={`h-7 w-7 fill-current ${theme === "light" ? "swap-on" : "swap-off"}`}
               xmlns="http://www.w3.org/2000/svg"
@@ -135,36 +117,20 @@ const Navbar = () => {
           </button>
 
           {/* Login/Logout Button */}
-          {isLoggedIn === false && (
-            <div className="flex space-x-3">
-              <Link
-                to="/sign-in"
-                className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
-              >
-                Login
-              
-              </Link>
-              <Link
-                to="/sign-up"
-                className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
-              >
-                Signup
-               
-              </Link>
-            </div>
-          )}
-
-          {/* User Avatar */}
-          {isLoggedIn && (
-            
-            <div className="avatar">
-              <div className="w-12 rounded-full">
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  alt="User Avatar"
-                />
-              </div>
-            </div>
+          {isLoggedIn ? (
+            <Logout />
+          ) : (
+            <div className="">
+            <a
+              className="bg-black text-white px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer"
+              onClick={() =>
+                document.getElementById("my_modal_3").showModal()
+              }
+            >
+              Login
+            </a>
+            <Login />
+          </div>
           )}
         </div>
       </div>

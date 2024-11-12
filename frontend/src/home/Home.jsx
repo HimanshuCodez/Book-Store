@@ -9,6 +9,7 @@ const Home = () => {
     <>
       <Navbar />
       <Banner />
+      
       <RecentlyAdded/>
       <Footer />
     </>
