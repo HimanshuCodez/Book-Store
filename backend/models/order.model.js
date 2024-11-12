@@ -14,14 +14,7 @@ const orderSchema = new mongoose.Schema({
         enum: ['Order Placed','Out For Delivery', 'Delivered','Cancelled'],
         default: 'Order Placed'
     },
-    // totalPrice: {
-    //     type: Number,
-    //     required: true
-    // },
-    // orderDate: {
-    //     type: Date,
-    //     default: Date.now
-    // }
+
  }, { timestamps: true });
 
 export default mongoose.model('order', orderSchema);

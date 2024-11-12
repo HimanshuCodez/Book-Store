@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-//schema
 const bookSchema =new mongoose.Schema({
 url:{
     type: String,

@@ -34,6 +34,5 @@ const userSchema = new mongoose.Schema({
    },],
 },
 {timestamps:true})
-//model
-//maybe in lower case
+
 export default mongoose.model("user", userSchema);
