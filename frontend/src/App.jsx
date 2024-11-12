@@ -11,6 +11,7 @@ import RecentlyAdded from "./components/RecentlyAdded";
 import BookDetails from "./components/ViewBookDeatails/BookDetails";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from './store/auth';
+// import Orders from "./components/Orders";
 
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/sign-in" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
+          {/* <Route path="orders" element={<Orders/>} /> */}
           <Route path="/view-book-details/:id" element={<BookDetails />} />
         </Routes>
         <Toaster />

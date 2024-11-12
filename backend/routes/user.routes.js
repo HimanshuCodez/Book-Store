@@ -101,7 +101,7 @@ router.get("/get-user-info",authenticateToken, async (req, res) => {
        return res.status(200).json(data);
 
     } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "get user info error" });
     }
 });
 
