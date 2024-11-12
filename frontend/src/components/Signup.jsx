@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Login from "./Login"; // Ensure Login is handled separately
 
 function Signup() {
   const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
-    address: "",  // Add address to the initial state
+    address: "",
   });
 
-  const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
 
-  // Update the input values in the state
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -23,19 +21,25 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check for empty fields
+    const { username, email, password, address } = values;
+    if (!username || !email || !password || !address) {
+      toast.error("All fields are required!");
+      return;
+    }
+
     try {
-      const res = await axios.post("http://localhost:4001/user/signup", values);
-      console.log(res.data);
-      if (res.data) {
-        toast.success("Signup Successfully");
-        localStorage.setItem("Users", JSON.stringify(res.data.user));
-        navigate(from, { replace: true });
+      const response = await axios.post("http://localhost:4000/api/v1/sign-up", values);
+      if (response.data) {
+        toast.success("Signup Successful");
+        navigate("/sign-in");
       }
     } catch (err) {
-      if (err.response) {
-        console.log(err);
-        toast.error("Error: " + err.response.data.message);
-      }
+      const errorMessage = err.response
+        ? `Error: ${err.response.data.message}`
+        : "Signup failed. Please try again later.";
+      console.error(err);
+      toast.error(errorMessage);
     }
   };
 
@@ -123,12 +127,22 @@ function Signup() {
               </button>
               <p className="text-xl">
                 Have an account?{" "}
-                <Link to="/login" className="underline text-blue-500">
+                <Link
+                  to="/sign-in"
+                  className="underline text-blue-500 cursor-pointer"
+                >
                   Login
                 </Link>
               </p>
             </div>
           </form>
+        </div>
+      </div>
+
+      {/* Login Modal */}
+      <div id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <Login /> {/* Assuming the login modal component */}
         </div>
       </div>
     </div>

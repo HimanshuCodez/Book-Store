@@ -18,8 +18,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/get-all-books" element={<AllBooks />} />
           <Route path="/recently-added" element={<RecentlyAdded/>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/sign-up" element={<Signup />} />
+          <Route path="/sign-in" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/view-book-details/:id" element={<BookDetails />} />
