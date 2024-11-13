@@ -11,6 +11,9 @@ import RecentlyAdded from "./components/RecentlyAdded";
 import BookDetails from "./components/ViewBookDeatails/BookDetails";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from './store/auth';
+import Favourites from "./components/Profile/Favourites";
+import UserOrderHistory from "./components/Profile/UserOrderHistory";
+import Settings from "./components/Profile/Settings";
 // import Orders from "./components/Orders";
 
 
@@ -37,9 +40,16 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/get-all-books" element={<AllBooks />} />
           <Route path="/recently-added" element={<RecentlyAdded />} />
+          <Route path="/view-book-details" element={<BookDetails />} />
+
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/sign-in" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} >
+          <Route index element={<Favourites/>}/ >
+          <Route path="/profile/orderHistory" element={<UserOrderHistory/>}/ >
+          <Route path="/profile/settings" element={<Settings/>}/ >
+          </Route>
+
           <Route path="/cart" element={<Cart />} />
           {/* <Route path="orders" element={<Orders/>} /> */}
           <Route path="/view-book-details/:id" element={<BookDetails />} />

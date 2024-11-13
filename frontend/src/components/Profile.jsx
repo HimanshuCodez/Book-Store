@@ -1,46 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
-import Sidebar from "./Sidebar"; // Import Sidebar component
+import Sidebar from "./Profile/Sidebar";
 import Loader from "./Loader/Loader";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Profile = () => {
-  const [profile, setProfile] = useState(null); // User profile state
+  const [profile, setProfile] = useState(null);
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
   };
 
-  // Fetch user data from API using useEffect
   useEffect(() => {
-    const fetch = async () => {
+    const fetchProfile = async () => {
       try {
         const response = await axios.get("http://localhost:4000/api/v1/get-user-info", { headers });
         setProfile(response.data);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching profile:", error);
       }
     };
-
-    fetch();
+    fetchProfile();
   }, []);
 
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      {!profile ? (
-        <div className="w-full h-full flex items-center justify-center">
-          <Loader /> {/* Show loader while data is being fetched */}
-        </div>
-      ) : (
-        <Sidebar profile={profile} /> // Pass profile data to Sidebar
-      )}
+    <div className="flex flex-col h-screen">
+      {/* Navbar fixed at the top */}
+      <Navbar />
 
-      {/* Profile Content */}
-      <div className="flex-1 p-6 bg-gray-100">
-        {/* Outlet for child routes */}
-        <Outlet />
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar on the left */}
+        {!profile ? (
+          <div className="w-full h-full flex items-center justify-center">
+            <Loader />
+          </div>
+        ) : (
+          <Sidebar profile={profile} />
+        )}
+
+        {/* Profile Content with Outlet for nested routes */}
+        <div className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+          <Outlet />
+        </div>
       </div>
+
+      {/* Footer fixed at the bottom */}
+      <Footer/>
     </div>
   );
 };
