@@ -25,10 +25,10 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  return (
+  return (<>
+      <Navbar />
     <div className="flex flex-col h-screen">
       {/* Navbar fixed at the top */}
-      <Navbar />
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar on the left */}
@@ -47,8 +47,9 @@ const Profile = () => {
       </div>
 
       {/* Footer fixed at the bottom */}
-      <Footer/>
+      S
     </div>
+    </>
   );
 };
 
