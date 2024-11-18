@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Login from "./Login"; // Ensure Login is handled separately
+import Login from './Login'; // Import the Login component
 
 function Signup() {
   const [values, setValues] = useState({
@@ -11,7 +11,7 @@ function Signup() {
     password: "",
     address: "",
   });
-
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State for modal visibility
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -43,10 +43,18 @@ function Signup() {
     }
   };
 
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true);  // Open login modal
+  };
+
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false);  // Close login modal
+  };
+
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="w-[600px]">
-        <div className="modal-box">
+        <div id="signup-modal" className="relative p-8 bg-white shadow-lg rounded-lg">
           <form onSubmit={handleSubmit}>
             <Link
               to="/"
@@ -55,7 +63,7 @@ function Signup() {
               ✕
             </Link>
 
-            <h3 className="font-bold text-lg">Signup</h3>
+            <h3 className="font-bold text-lg mb-4">Signup</h3>
 
             {/* Name Input */}
             <div className="mt-4 space-y-2">
@@ -64,7 +72,7 @@ function Signup() {
                 type="text"
                 id="username"
                 name="username"
-                placeholder="Enter your fullname"
+                placeholder="Enter your full name"
                 className="w-80 px-3 py-1 border rounded-md outline-none"
                 value={values.username}
                 onChange={handleChange}
@@ -127,12 +135,12 @@ function Signup() {
               </button>
               <p className="text-xl">
                 Have an account?{" "}
-                <Link
-                  to="/sign-in"
+                <span
                   className="underline text-blue-500 cursor-pointer"
+                  onClick={openLoginModal} // Open login modal
                 >
                   Login
-                </Link>
+                </span>
               </p>
             </div>
           </form>
@@ -140,7 +148,21 @@ function Signup() {
       </div>
 
       {/* Login Modal */}
-      
+      {isLoginModalOpen && (
+        <div className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="modal-box relative bg-white rounded-lg shadow-lg p-8">
+            <button
+              onClick={closeLoginModal}  // Close modal when clicked
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+            <h3 className="font-bold text-lg">Login</h3>
+            {/* Login Component is here */}
+            <Login />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -18,7 +18,7 @@ function Login() {
 
   // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form behavior
     const { email, password } = values;
 
     if (!email || !password) {
@@ -46,13 +46,6 @@ function Login() {
       toast.error(errorMessage);
     }
   };
-
-  // Open the modal when component mounts
-  useEffect(() => {
-    if (modalRef.current) {
-      modalRef.current.showModal(); // Open modal on mount
-    }
-  }, []);
 
   // Inline styles
   const modalStyles = {
@@ -87,15 +80,21 @@ function Login() {
     cursor: 'pointer',
   };
 
+  // Close modal function
+  const closeModal = () => {
+    if (modalRef.current) {
+      modalRef.current.close(); // Close modal
+    }
+  };
+
   return (
     <div>
-     
-      <dialog ref={modalRef} id="my_modal_3" className="modal" style={modalStyles}>
+      <dialog ref={modalRef} id="login-modal" className="modal" style={modalStyles}>
         <div className="modal-box" style={modalBoxStyles}>
-          <Link to="/"
-          >
+          {/* Close Button */}
+          <button onClick={closeModal} style={closeButtonStyles}>
             ✕
-          </Link>
+          </button>
 
           <h3 className="font-bold text-lg">Login</h3>
 
@@ -129,7 +128,11 @@ function Login() {
 
           {/* Submit Button */}
           <div className="flex justify-around mt-6">
-            <button onClick={handleSubmit} type="submit" className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200">
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200"
+            >
               Login
             </button>
             <p>

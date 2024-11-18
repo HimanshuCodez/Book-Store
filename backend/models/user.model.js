@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
       type : mongoose.Types.ObjectId,
       ref : "books",
    },],
+    cart:[{ 
+      type : mongoose.Types.ObjectId,
+      ref : "books",
+   },],
     orders:[{ 
       type : mongoose.Types.ObjectId,
       ref : "order",
