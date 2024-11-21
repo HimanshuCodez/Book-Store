@@ -35,12 +35,12 @@ const Favourites = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {favourites.map((item, i) => (
             <div
-              key={i}
-              className="shadow-lg rounded-lg overflow-hidden bg-white flex flex-col h-full"
+            key={i}
+            className="shadow-lg rounded-lg overflow-hidden bg-white flex flex-col h-full"
             >
               <div className="flex-1 p-4"> {/* Ensure padding inside the card container */}
                 <div className="h-full flex flex-col">
-                  <Cards data={item} />
+            <Cards data={item} />
                 </div>
               </div>
             </div>

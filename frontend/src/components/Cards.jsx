@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Cards = ({ data }) => {
+const Cards = ({ data, favourite }) => {
   return (
     <>
       <Link to={`/view-book-details/${data._id}`}>
@@ -25,6 +25,7 @@ const Cards = ({ data }) => {
               <div className="card-actions justify-between ">
                 <p className=" font-extrabold ">₹{data.discountedPrice}</p>
                 <p className=" line-through opacity-50">₹{data.price}</p>
+
                 <div className="cursor-pointer px-2 py-1 rounded-lg border-2 border-gray-300 hover:bg-purple-600 hover:text-white transition duration-200">
                   Buy Now
                 </div>
@@ -33,6 +34,12 @@ const Cards = ({ data }) => {
           </div>
         </div>
       </Link>
+     {favouritesCount && ( <button
+        className="bg-yellow-50 mt-4 font-semibold px-4 py-2 rounded border border-yellow-500 text-yellow-500"
+        onClick={handleRemoveBook}
+      >
+        Remove from Favourites
+      </button>)}
     </>
   );
 };
