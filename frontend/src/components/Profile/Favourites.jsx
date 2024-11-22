@@ -32,16 +32,12 @@ const Favourites = () => {
         Your Favourite Books
       </h1>
       {favourites.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3">
           {favourites.map((item, i) => (
-            <div
-            key={i}
-            className="shadow-lg rounded-lg overflow-hidden bg-white flex flex-col h-full"
-            >
-              <div className="flex-1 p-4"> {/* Ensure padding inside the card container */}
-                <div className="h-full flex flex-col">
-            <Cards data={item} />
-                </div>
+            <div key={i} className="flex justify-center">
+              {/* Apply fixed card dimensions */}
+              <div className="">
+                <Cards data={item} favourite={true} />
               </div>
             </div>
           ))}

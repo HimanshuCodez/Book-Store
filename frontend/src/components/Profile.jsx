@@ -41,13 +41,13 @@ const Profile = () => {
         )}
 
         {/* Profile Content with Outlet for nested routes */}
-        <div className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+        <div className="flex-1  bg-gray-100 overflow-y-auto" style={{paddingLeft:"40vh"}}>
           <Outlet />
         </div>
       </div>
 
       {/* Footer fixed at the bottom */}
-      S
+      
     </div>
     </>
   );

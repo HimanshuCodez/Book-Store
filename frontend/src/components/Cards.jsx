@@ -31,15 +31,15 @@ const Cards = ({ data, favourite }) => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </Link>
-     {favouritesCount && ( <button
+     {favourite && ( <button
         className="bg-yellow-50 mt-4 font-semibold px-4 py-2 rounded border border-yellow-500 text-yellow-500"
-        onClick={handleRemoveBook}
+      
       >
         Remove from Favourites
       </button>)}
+          </div>
+        </div>
+      </Link>
     </>
   );
 };
