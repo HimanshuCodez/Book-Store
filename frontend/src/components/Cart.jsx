@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Cards from "./Cards";
 import { Link } from "react-router-dom";
+import { FiTrash2 } from "react-icons/fi"; // Importing the delete icon from react-icons
 
 const Cart = () => {
   const [cart, setCart] = useState();
@@ -30,20 +30,6 @@ const Cart = () => {
     fetchCart();
   }, []); // Runs only once on mount
 
-  const updateQuantity = async (bookId, quantity) => {
-    try {
-      await axios.patch(
-        `http://localhost:4000/api/v1/update-cart-book/${bookId}`,
-        { quantity },
-        { headers }
-      );
-      // Re-fetch cart after updating quantity
-      fetchCart();
-    } catch (error) {
-      console.error("Error updating quantity:", error);
-    }
-  };
-
   const removeFromCart = async (bookId) => {
     try {
       await axios.delete(
@@ -59,9 +45,17 @@ const Cart = () => {
 
   const calculateTotal = () => {
     return cart?.items?.reduce(
-      (total, item) => total + item.price * item.quantity,
+      (total, item) => total + (item.price || 0), // Remove quantity logic
       0
     );
+  };
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Keeps it to 2 decimal places
+    }).format(amount);
   };
 
   return (
@@ -82,7 +76,7 @@ const Cart = () => {
         <div>
           {/* Cart items */}
           <div className="space-y-6">
-            {cart.map((item, i) => (
+            {cart.map((item,i) => (
               <div
                 key={item._id}
                 className="flex items-center justify-between bg-white shadow-lg rounded-lg p-4"
@@ -96,38 +90,24 @@ const Cart = () => {
                   />
                   <div>
                     <h2 className="text-lg font-semibold">{item.name}</h2>
-                    <p className="text-gray-500">₹{item.price.toFixed(2)}</p>
+                    <p className="text-gray-500">
+                      {formatCurrency(item.price || 0)} {/* Format as currency */}
+                    </p>
                   </div>
                 </div>
 
-                {/* Quantity Controls */}
-                <div className="flex items-center space-x-4">
+                {/* Item Total & Delete Icon */}
+                <div className="flex items-center justify-between">
+                  <div className="text-right">
+                    <p className="text-lg font-bold">
+                      {formatCurrency(item.price || 0)} {/* Single item price */}
+                    </p>
+                  </div>
                   <button
-                    onClick={() => updateQuantity(item._id, item.quantity - 1)}
-                    className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-                    disabled={item.quantity === 1}
+                    onClick={() => removeFromCart(item.bookId)}
+                    className="text-red-500 hover:text-red-700 transition"
                   >
-                    −
-                  </button>
-                  <span className="text-lg font-semibold">{item.quantity}</span>
-                  <button
-                    onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                    className="px-3 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-                  >
-                    +
-                  </button>
-                </div>
-
-                {/* Item Total & Remove */}
-                <div className="text-right">
-                  <p className="text-lg font-bold">
-                    
-                  </p>
-                  <button
-                    onClick={() => removeFromCart(item._id)}
-                    className="text-sm text-red-500 hover:underline mt-2"
-                  >
-                    Remove
+                    <FiTrash2 size={24} /> {/* Trash icon */}
                   </button>
                 </div>
               </div>
@@ -137,7 +117,7 @@ const Cart = () => {
             <div className="flex justify-between items-center border-t pt-4">
               <h2 className="text-xl font-bold">Total:</h2>
               <p className="text-2xl font-bold text-green-600">
-               
+                {formatCurrency(calculateTotal())} {/* Format total as currency */}
               </p>
             </div>
 
