@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi"; // Importing the delete icon from react-icons
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const [cart, setCart] = useState();
@@ -28,20 +29,16 @@ const Cart = () => {
     };
 
     fetchCart();
-  }, []); // Runs only once on mount
+  }, [cart]); // Runs only once on mount
 
-  const removeFromCart = async (bookId) => {
-    try {
-      await axios.delete(
-        `http://localhost:4000/api/v1/remove-from-cart/${bookId}`,
+  const removeFromCart = async (bookid) => {
+    const response = await axios.put(
+        `http://localhost:4000/api/v1/remove-from-cart/${bookid}`,
+        {},
         { headers }
       );
-      // Re-fetch cart after removal
-      fetchCart();
-    } catch (error) {
-      console.error("Error removing item from cart:", error);
+      toast.success(response.data.data)
     }
-  };
 
   const calculateTotal = () => {
     return cart?.items?.reduce(
@@ -104,7 +101,7 @@ const Cart = () => {
                     </p>
                   </div>
                   <button
-                    onClick={() => removeFromCart(item.bookId)}
+                    onClick={() => removeFromCart(item.bookid)}
                     className="text-red-500 hover:text-red-700 transition"
                   >
                     <FiTrash2 size={24} /> {/* Trash icon */}

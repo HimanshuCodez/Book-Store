@@ -42,7 +42,7 @@ router.put('/remove-from-cart/:bookid', authenticateToken, async (req, res) => {
         await User.findByIdAndUpdate(id, { $pull: { cart: bookid } });
         return res.status(200).json({ message: 'Book removed to cart' });
     } catch (error) {
-        console.log('Error removing book to favourite', error);
+        console.log('Error removing book to cart', error);
         res.status(500).json(error);
     }
 });
