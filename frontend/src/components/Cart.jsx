@@ -37,7 +37,8 @@ const Cart = () => {
         {},
         { headers }
       );
-      toast.success(response.data.data)
+      console.log(response);
+      toast.success("removed from cart")
     }
 
   const calculateTotal = () => {
@@ -101,7 +102,7 @@ const Cart = () => {
                     </p>
                   </div>
                   <button
-                    onClick={() => removeFromCart(item.bookid)}
+                    onClick={() => removeFromCart(item._id)}
                     className="text-red-500 hover:text-red-700 transition"
                   >
                     <FiTrash2 size={24} /> {/* Trash icon */}
