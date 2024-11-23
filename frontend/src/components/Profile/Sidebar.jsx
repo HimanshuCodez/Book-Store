@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TbLogout } from "react-icons/tb";
 import { MdClose } from "react-icons/md";
-import { FiMoreHorizontal } from "react-icons/fi"; // Import the three-dot icon
+import { FiMoreHorizontal } from "react-icons/fi";
 
 const Sidebar = ({ profile }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -12,9 +12,12 @@ const Sidebar = ({ profile }) => {
   };
 
   return (
-    <>
+    <div className="mt-4 mx-4"> {/* Wrapper for consistent margins */}
       {isOpen && (
-        <div className="bg-gray-800 text-white p-6 h-full w-full md:w-64 md:fixed md:left-0 top-0 flex flex-col shadow-lg z-50 md:h-screen md:pt-16 relative">
+        <div
+          className="bg-gray-800 text-white p-6 w-full md:w-64 md:fixed top-16 left-4 bottom-4 flex flex-col shadow-lg z-50 rounded-lg"
+          style={{ height: "calc(100vh - 80px)" }} // Adjust height for navbar and margin
+        >
           {/* Close Button */}
           <button
             onClick={toggleSidebar}
@@ -24,16 +27,14 @@ const Sidebar = ({ profile }) => {
           </button>
 
           {/* User's Profile Section */}
-          <div className="flex items-center space-x-4 mb-8">
+          <div className="flex flex-col items-center mb-8">
             <img
               src={profile.avatar || "/path/to/default/avatar.jpg"}
               alt="User Profile"
-              className="w-14 h-14 rounded-full border-2 border-white"
+              className="w-14 h-14 rounded-full border-2 border-white mb-4"
             />
-            <div>
-              <h3 className="text-lg mt-1 font-semibold">{profile.username}</h3>
-              <p className="text-xs text-gray-400">{profile.email}</p>
-            </div>
+            <h3 className="text-lg font-semibold">{profile.username}</h3>
+            <p className="text-xs text-gray-400">{profile.email}</p>
           </div>
 
           {/* Sidebar Navigation Links */}
@@ -79,12 +80,12 @@ const Sidebar = ({ profile }) => {
       {!isOpen && (
         <button
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 bg-gray-800 text-white p-2 rounded-md shadow-lg hover:bg-gray-700 transition-all duration-300 md:hidden z-50"
+          className="fixed top-20 left-4 bg-gray-800 text-white p-2 rounded-md shadow-lg hover:bg-gray-700 transition-all duration-300 md:hidden z-50"
         >
           <FiMoreHorizontal size={24} /> {/* Three-dot icon */}
         </button>
       )}
-    </>
+    </div>
   );
 };
 

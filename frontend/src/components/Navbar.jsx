@@ -51,11 +51,11 @@ const location = useLocation();
     >
       <div className="navbar">
         <div className="navbar-start">
-        {location.pathname !== "/profile" && (
+      
   <Link to="/" className="text-2xl font-bold cursor-pointer">
     Bookish
   </Link>
-)}
+
         </div>
 
         {/* Desktop Navigation */}

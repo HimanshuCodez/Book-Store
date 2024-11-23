@@ -25,8 +25,10 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  return (<>
+  return (
+  <><div>
       <Navbar />
+      </div>
     <div className="flex flex-col h-screen">
       {/* Navbar fixed at the top */}
 

@@ -24,11 +24,11 @@ const Favourites = () => {
     };
 
     fetch();
-  }, []);
+  }, [favourites]);
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-semibold text-gray-800 mb-8 text-center">
+      <h1 className="text-3xl font-semibold text-gray-800 mt-8 mb-8 text-center">
         Your Favourite Books
       </h1>
       {favourites.length > 0 ? (
