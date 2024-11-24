@@ -4,6 +4,7 @@ import { Elements, CardElement, useStripe, useElements } from "@stripe/react-str
 import { useLocation } from "react-router-dom"; // Import useLocation
 import axios from "axios";
 
+
 const stripePromise = loadStripe("pk_test_51QOZvGEb71cybCjRhqYHR8uxzsbMTrwJvd4zkJ1bQs6jgDtHJnedLt1FytsmG5vKpOEQh2qtpr2bRrDYSRbFC5mH00Zw37EnKv");
 
 const PaymentForm = ({ totalPrice }) => {
@@ -131,8 +132,9 @@ const PaymentForm = ({ totalPrice }) => {
         </form>
       ) : (
         <div className="text-center">
-          <h3 className="text-2xl font-bold text-green-600">Payment Successful!</h3>
-          <p className="text-lg mt-2">Thank you for your purchase.</p>
+         
+          <h3 className="text-2xl font-bold text-green-600 fade-in">Payment Successful!</h3>
+          <p className="text-lg mt-2 fade-in">Thank you for your purchase.</p>
           {/* Success Animation (GIF) */}
           <img
             src="https://media1.tenor.com/m/xPh7mDqOZ8UAAAAd/success.gif"
@@ -144,7 +146,7 @@ const PaymentForm = ({ totalPrice }) => {
       )}
 
       {/* Display Message */}
-      {message && <p className="mt-4 text-center text-sm text-red-600">{message}</p>}
+      {message && <p className="mt-4 text-center text-sm text-red-600 fade-in">{message}</p>}
     </div>
   );
 };

@@ -42,7 +42,7 @@ const Cart = () => {
         { headers }
       );
       // Update cart state after removal
-      setCart((prevCart) => prevCart.filter((item) => item._id !== bookId));
+      setCart((prevCart) => prevCart.filter((item) => item._id !== bookId)); // Remove item from the cart in the state
       toast.success("Removed from cart");
     } catch (error) {
       console.error("Error removing item from cart:", error);
@@ -100,7 +100,9 @@ const Cart = () => {
                     <h2 className="text-lg font-semibold text-gray-800">
                       {item.name}
                     </h2>
-                    <p className="text-gray-500">Price: {formatCurrency(item.price)}</p>
+                    <p className="text-gray-500">
+                      Price: {formatCurrency(item.price)}
+                    </p>
                   </div>
                 </div>
 
@@ -118,18 +120,20 @@ const Cart = () => {
           {/* Total Price */}
           <div className="flex justify-between items-center border-t pt-4 mt-6">
             <h2 className="text-xl font-bold">Total:</h2>
-            <p className="text-2xl font-bold text-green-600">{formatCurrency(total)}</p>
+            <p className="text-2xl font-bold text-green-600">
+              {formatCurrency(total)}
+            </p>
           </div>
 
           {/* Checkout Button */}
           <div className="flex justify-end mt-6">
-          <Link
-  to="/checkout"
-  state={{ cart, total }}
-  className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
->
-  Proceed to Checkout
-</Link>
+            <Link
+              to="/checkout"
+              state={{ cart, total }}
+              className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
+            >
+              Proceed to Checkout
+            </Link>
           </div>
         </div>
       )}
