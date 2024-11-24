@@ -14,6 +14,7 @@ import { authActions } from './store/auth';
 import Favourites from "./components/Profile/Favourites";
 import UserOrderHistory from "./components/Profile/UserOrderHistory";
 import Settings from "./components/Profile/Settings";
+import Payment from "./components/Payment";
 // import Orders from "./components/Orders";
 
 
@@ -51,6 +52,7 @@ const App = () => {
           </Route>
 
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Payment/>} />
           {/* <Route path="orders" element={<Orders/>} /> */}
           <Route path="/view-book-details/:id" element={<BookDetails />} />
         </Routes>
