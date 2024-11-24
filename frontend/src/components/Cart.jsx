@@ -3,9 +3,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi"; // Importing the delete icon from react-icons
 import toast from "react-hot-toast";
+import Loader from "./Loader/Loader";
 
 const Cart = () => {
-  const [cart, setCart] = useState();
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const headers = {
@@ -20,39 +22,47 @@ const Cart = () => {
           "http://localhost:4000/api/v1/get-cart-books",
           { headers }
         );
-        setCart(response.data.data); // Assuming the cart data is in response.data.data
-        setLoading(false); // Stop loading when data is fetched
+        setCart(response.data.data || []); // Set cart data or an empty array
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching cart books:", error);
+        toast.error("Failed to fetch cart items.");
         setLoading(false);
       }
     };
 
     fetchCart();
-  }, [cart]); // Runs only once on mount
+  }, []); // Run only once on mount
 
-  const removeFromCart = async (bookid) => {
-    const response = await axios.put(
-        `http://localhost:4000/api/v1/remove-from-cart/${bookid}`,
+  const removeFromCart = async (bookId) => {
+    try {
+      await axios.put(
+        `http://localhost:4000/api/v1/remove-from-cart/${bookId}`,
         {},
         { headers }
       );
-      console.log(response);
-      toast.success("removed from cart")
+      // Update cart state after removal
+      setCart((prevCart) => prevCart.filter((item) => item._id !== bookId));
+      toast.success("Removed from cart");
+    } catch (error) {
+      console.error("Error removing item from cart:", error);
+      toast.error("Failed to remove item from cart.");
     }
-
-  const calculateTotal = () => {
-    return cart?.items?.reduce(
-      (total, item) => total + (item.price || 0), // Remove quantity logic
-      0
-    );
   };
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+      setTotal(totalAmount);
+    } else {
+      setTotal(0);
+    }
+  }, [cart]);
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
-      maximumFractionDigits: 2, // Keeps it to 2 decimal places
     }).format(amount);
   };
 
@@ -62,10 +72,10 @@ const Cart = () => {
         Your Cart
       </h1>
       {loading ? (
-        <div className="text-center">Loading...</div>
-      ) : cart.items?.length === 0 ? (
+        <Loader />
+      ) : cart.length === 0 ? (
         <div className="text-center">
-          Your cart is empty.{" "}
+          <p className="text-gray-600 text-lg">No items in your cart.</p>
           <Link to="/" className="text-purple-500 underline">
             Shop Now
           </Link>
@@ -74,10 +84,10 @@ const Cart = () => {
         <div>
           {/* Cart items */}
           <div className="space-y-6">
-            {cart.map((item,i) => (
+            {cart.map((item) => (
               <div
                 key={item._id}
-                className="flex items-center justify-between bg-white shadow-lg rounded-lg p-4"
+                className="flex items-center justify-between bg-white p-4 rounded shadow-md"
               >
                 {/* Book Info */}
                 <div className="flex items-center space-x-4">
@@ -87,47 +97,38 @@ const Cart = () => {
                     className="w-16 h-16 object-cover rounded-lg"
                   />
                   <div>
-                    <h2 className="text-lg font-semibold">{item.name}</h2>
-                    <p className="text-gray-500">
-                      {formatCurrency(item.price || 0)} {/* Format as currency */}
-                    </p>
+                    <h2 className="text-lg font-semibold text-gray-800">
+                      {item.name}
+                    </h2>
+                    <p className="text-gray-500">Price: {formatCurrency(item.price)}</p>
                   </div>
                 </div>
 
-                {/* Item Total & Delete Icon */}
-                <div className="flex items-center justify-between">
-                  <div className="text-right">
-                    <p className="text-lg font-bold">
-                      {formatCurrency(item.price || 0)} {/* Single item price */}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => removeFromCart(item._id)}
-                    className="text-red-500 hover:text-red-700 transition"
-                  >
-                    <FiTrash2 size={24} /> {/* Trash icon */}
-                  </button>
-                </div>
+                {/* Delete Icon */}
+                <button
+                  onClick={() => removeFromCart(item._id)}
+                  className="text-red-500 hover:text-red-700 transition"
+                >
+                  <FiTrash2 size={24} />
+                </button>
               </div>
             ))}
+          </div>
 
-            {/* Total Price */}
-            <div className="flex justify-between items-center border-t pt-4">
-              <h2 className="text-xl font-bold">Total:</h2>
-              <p className="text-2xl font-bold text-green-600">
-                {formatCurrency(calculateTotal())} {/* Format total as currency */}
-              </p>
-            </div>
+          {/* Total Price */}
+          <div className="flex justify-between items-center border-t pt-4 mt-6">
+            <h2 className="text-xl font-bold">Total:</h2>
+            <p className="text-2xl font-bold text-green-600">{formatCurrency(total)}</p>
+          </div>
 
-            {/* Checkout Button */}
-            <div className="flex justify-end mt-6">
-              <Link
-                to="/checkout"
-                className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
-              >
-                Proceed to Checkout
-              </Link>
-            </div>
+          {/* Checkout Button */}
+          <div className="flex justify-end mt-6">
+            <Link
+              to="/checkout"
+              className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
+            >
+              Proceed to Checkout
+            </Link>
           </div>
         </div>
       )}
