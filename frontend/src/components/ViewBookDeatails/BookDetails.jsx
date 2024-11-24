@@ -4,9 +4,9 @@ import axios from "axios";
 import Loader from "../Loader/Loader";
 import { FaHeart, FaCartPlus, FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { FaEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
 import toast from "react-hot-toast";
+import RelatedBooks from "./RelatedBooks";
+import Navbar from "../Navbar";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -23,7 +23,37 @@ const BookDetails = () => {
         setLoading(true);
         const response = await axios.get(`http://localhost:4000/api/v1/get-book-by-id/${id}`);
         setBookData(response.data.data);
-        setReviews(response.data.reviews || []); // Assuming the API returns reviews
+
+        // Fake reviews for testing with avatars
+        const fakeReviews = [
+          {
+            text: "Great book! Very insightful and engaging.",
+            rating: 5,
+            user: { name: "John Doe", avatar: "https://i.pravatar.cc/150?img=1" },
+          },
+          {
+            text: "I loved the plot twists. A must-read for thriller fans.",
+            rating: 4,
+            user: { name: "Jane Smith", avatar: "https://i.pravatar.cc/150?img=2" },
+          },
+          {
+            text: "Decent read, but the ending was a bit predictable.",
+            rating: 3,
+            user: { name: "Michael Brown", avatar: "https://i.pravatar.cc/150?img=3" },
+          },
+          {
+            text: "Didn't enjoy it as much as I thought I would. The pacing was slow.",
+            rating: 2,
+            user: { name: "Emily White", avatar: "https://i.pravatar.cc/150?img=4" },
+          },
+          {
+            text: "Not my cup of tea. Felt too cliche.",
+            rating: 1,
+            user: { name: "Chris Green", avatar: "https://i.pravatar.cc/150?img=5" },
+          },
+        ];
+
+        setReviews(fakeReviews); // Set the fake reviews with avatars
         setLoading(false);
       } catch (error) {
         console.error("Error fetching book data:", error);
@@ -85,6 +115,11 @@ const BookDetails = () => {
     }
   };
 
+  // Handle the rating star click
+  const handleRatingClick = (rating) => {
+    setNewReview({ ...newReview, rating });
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center my-8">
@@ -95,6 +130,7 @@ const BookDetails = () => {
 
   return (
     <>
+      <Navbar />
       {bookData ? (
         <div className="px-4 md:px-12 py-8 bg-zinc-900 flex flex-col gap-8">
           {/* Book Image and Details Section */}
@@ -138,12 +174,22 @@ const BookDetails = () => {
               {reviews.length > 0 ? (
                 reviews.map((review, index) => (
                   <div key={index} className="p-4 bg-zinc-700 rounded-lg">
-                    <div className="flex items-center space-x-2">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <FaStar key={i} className="text-yellow-400" />
-                      ))}
+                    <div className="flex items-center space-x-4">
+                      <img
+                        src="https://imgs.search.brave.com/3L58XVCErl9Jwact_9hf94wgnvkan16Acz9ugZpCIj0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wbmdz/ZXQuY29tL2ltYWdl/cy9pbWFnZS1vZi1w/cmluY2Vzcy1idWJi/bGVndW0tcHJvZmls/ZS1wcmVzYWxlLXB1/cnBsZS1sZWlzdXJl/LWFjdGl2aXRpZXMt/YmFkbWludG9uLXN0/b21hY2gtdHJhbnNw/YXJlbnQtcG5nLTY0/NTE2OS5wbmc"
+                        alt={review.user.name}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div>
+                        <div className="font-semibold text-zinc-100">{review.user.name}</div>
+                        <div className="flex items-center space-x-2">
+                          {[...Array(review.rating)].map((_, i) => (
+                            <FaStar key={i} className="text-yellow-400" />
+                          ))}
+                        </div>
+                        <p className="text-sm text-zinc-300 mt-2">{review.text}</p>
+                      </div>
                     </div>
-                    <p className="text-sm text-zinc-300 mt-2">{review.text}</p>
                   </div>
                 ))
               ) : (
@@ -159,28 +205,23 @@ const BookDetails = () => {
                   placeholder="Write your review here..."
                   required
                 ></textarea>
-                <div className="flex items-center space-x-2">
-                  <label htmlFor="rating" className="text-sm text-zinc-400">
-                    Rating:
-                  </label>
-                  <select
-                    id="rating"
-                    value={newReview.rating}
-                    onChange={(e) => setNewReview({ ...newReview, rating: +e.target.value })}
-                    className="p-2 rounded bg-zinc-700 text-white"
-                    required
-                  >
-                    <option value="">Select</option>
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <option key={num} value={num}>
-                        {num} Star{num > 1 ? "s" : ""}
-                      </option>
-                    ))}
-                  </select>
+
+                {/* Star Rating */}
+                <div className="flex items-center space-x-2 mt-4">
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <FaStar
+                      key={rating}
+                      className={`cursor-pointer text-xl ${
+                        newReview.rating >= rating ? "text-yellow-400" : "text-zinc-500"
+                      }`}
+                      onClick={() => handleRatingClick(rating)} // Handle star click
+                    />
+                  ))}
                 </div>
+
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4"
                 >
                   Submit Review
                 </button>
@@ -193,6 +234,7 @@ const BookDetails = () => {
           <Loader />
         </div>
       )}
+      <RelatedBooks />
     </>
   );
 };

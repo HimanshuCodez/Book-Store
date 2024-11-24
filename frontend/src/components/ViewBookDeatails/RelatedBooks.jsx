@@ -2,25 +2,24 @@ import React, { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
 import axios from "axios";
-import Cards from "./Cards";
-import Loader from "./Loader/Loader";
-const  RecentlyAdded = ()=> {
-  
+import Cards from '../Cards'
+import Loader from "../Loader/Loader";
+
+const RelatedBooks = () => {
   const [Data, setData] = useState();
+
   useEffect(() => {
     // Fetch data from API
     const fetch = async () => {
       const response = await axios.get(
         "http://localhost:4000/api/v1/get-recent-books"
       );
-     setData(response.data.data);
+      setData(response.data.data);
     };
     fetch();
   }, []);
 
-  
   var settings = {
     dots: true, // Show navigation dots
     infinite: true, // Infinite loop sliding
@@ -56,26 +55,32 @@ const  RecentlyAdded = ()=> {
       },
     ],
   };
+
   return (
     <>
-      <div className=" max-w-screen-2xl container mx-auto md:px-20 px-4">
+      <div className="bg-zinc-900 max-w-screen-2xl container mx-auto md:px-20 px-4 py-8">
         <div>
-          <h1 className="font-semibold text-xl pb-2">Top Selling Books</h1>
+          <h1 className="font-semibold text-xl pb-2 text-white">Related Books</h1>
         </div>
 
-        <div>
-            {!Data && <div className=" flex items-center justify-center my-8"> <Loader/> </div>}
-          <Slider {...settings}>
-            {Data && Data.map((item,i) => (
-              <div key={i}>
-              
-              <Cards  data={item} key={item.id} />
-              </div>
-            ))}
+        <div className="bg-zinc-900">
+          {!Data && (
+            <div className="flex items-center justify-center my-8">
+              <Loader />
+            </div>
+          )}
+          <Slider className="bg-zinc-900" {...settings}>
+            {Data &&
+              Data.map((item, i) => (
+                <div key={i}>
+                  <Cards data={item} key={item.id} />
+                </div>
+              ))}
           </Slider>
         </div>
       </div>
     </>
   );
-}
-export default RecentlyAdded;
+};
+
+export default RelatedBooks;
