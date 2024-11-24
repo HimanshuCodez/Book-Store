@@ -123,12 +123,13 @@ const Cart = () => {
 
           {/* Checkout Button */}
           <div className="flex justify-end mt-6">
-            <Link
-              to="/checkout"
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
-            >
-              Proceed to Checkout
-            </Link>
+          <Link
+  to="/checkout"
+  state={{ cart, total }}
+  className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
+>
+  Proceed to Checkout
+</Link>
           </div>
         </div>
       )}

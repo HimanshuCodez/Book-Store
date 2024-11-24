@@ -53,17 +53,7 @@ const Cards = ({ data, favourite, setProfile }) => {
         </div>
       </Link>
 
-      {/* Remove from Favourites Button Styled as Full-Length Card */}
-      {favourite && (
-        <div className="card w-92 bg-yellow-50 shadow-md mt-4 p-4 border border-yellow-500 rounded-lg">
-          <button
-            onClick={handleBookRemove}
-            className="w-full text-yellow-500 font-semibold hover:bg-yellow-500 hover:text-white transition duration-200"
-          >
-            Remove from Favourites
-          </button>
-        </div>
-      )}
+    
     </div>
   );
 };

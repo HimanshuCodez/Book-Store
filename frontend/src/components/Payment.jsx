@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import axios from "axios";
 
 const stripePromise = loadStripe("pk_test_51QOZvGEb71cybCjRhqYHR8uxzsbMTrwJvd4zkJ1bQs6jgDtHJnedLt1FytsmG5vKpOEQh2qtpr2bRrDYSRbFC5mH00Zw37EnKv");
 
-const PaymentForm = () => {
+const PaymentForm = ({ totalPrice }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [amount, setAmount] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [customerDetails, setCustomerDetails] = useState({
     name: "",
@@ -28,10 +28,6 @@ const PaymentForm = () => {
       setMessage("Stripe is not loaded yet. Please try again.");
       return;
     }
-    if (!amount || isNaN(amount) || amount <= 0) {
-      setMessage("Please enter a valid payment amount.");
-      return;
-    }
 
     setLoading(true);
     setMessage("");
@@ -39,7 +35,7 @@ const PaymentForm = () => {
     try {
       // Step 1: Get client secret from backend
       const { data } = await axios.post("http://localhost:4000/api/v1/payment/create-payment-intent", {
-        amount: amount, // Amount in INR
+        amount: totalPrice * 100, // Amount in cents
         currency: "inr",
       });
 
@@ -109,20 +105,9 @@ const PaymentForm = () => {
             />
           </div>
 
-          {/* Payment Amount */}
+          {/* Display Total Amount */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold mb-1" htmlFor="amount">
-              Payment Amount (INR)
-            </label>
-            <input
-              type="number"
-              id="amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="w-full px-3 py-2 border rounded"
-              placeholder="Enter amount"
-              required
-            />
+            <p className="text-sm font-semibold">Total Amount (INR): ₹{totalPrice}</p>
           </div>
 
           {/* Card Element */}
@@ -150,7 +135,7 @@ const PaymentForm = () => {
           <p className="text-lg mt-2">Thank you for your purchase.</p>
           {/* Success Animation (GIF) */}
           <img
-            src="https://media1.tenor.com/m/xPh7mDqOZ8UAAAAd/success.gif" // Replace with your preferred success GIF
+            src="https://media1.tenor.com/m/xPh7mDqOZ8UAAAAd/success.gif"
             alt="Success"
             className="mt-4 mx-auto"
             style={{ width: "150px", height: "150px" }}
@@ -164,13 +149,18 @@ const PaymentForm = () => {
   );
 };
 
-const Payment = () => (
-  <Elements stripe={stripePromise}>
-    <div className="payment-container max-w-md mx-auto bg-gray-100 p-6 rounded shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Make a Payment</h2>
-      <PaymentForm />
-    </div>
-  </Elements>
-);
+const Payment = () => {
+  const location = useLocation();
+  const { cart, total } = location.state; // Receive cart and total from state
+
+  return (
+    <Elements stripe={stripePromise}>
+      <div className="payment-container max-w-md mx-auto bg-gray-100 p-6 rounded shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Make a Payment</h2>
+        <PaymentForm totalPrice={total} />
+      </div>
+    </Elements>
+  );
+};
 
 export default Payment;
