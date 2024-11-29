@@ -45,6 +45,7 @@ const PaymentForm = ({ totalPrice }) => {
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
+        
           billing_details: {
             name: customerDetails.name,
             email: customerDetails.email,

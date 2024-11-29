@@ -15,6 +15,8 @@ import Favourites from "./components/Profile/Favourites";
 import UserOrderHistory from "./components/Profile/UserOrderHistory";
 import Settings from "./components/Profile/Settings";
 import Payment from "./components/Payment";
+import AdminBookRequests from "./components/Admin/bookRequest";
+import UserBookRequest from "./components/RequestBook";
 // import Orders from "./components/Orders";
 
 
@@ -42,6 +44,8 @@ const App = () => {
           <Route path="/get-all-books" element={<AllBooks />} />
           <Route path="/recently-added" element={<RecentlyAdded />} />
           <Route path="/view-book-details" element={<BookDetails />} />
+          <Route path="/admin-book-requests" element={<AdminBookRequests />} />
+          <Route path="/user-book-requests" element={<UserBookRequest />} />
 
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/sign-in" element={<Login />} />

@@ -21,7 +21,9 @@ const BookDetails = () => {
     const fetchBookData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:4000/api/v1/get-book-by-id/${id}`);
+        const response = await axios.get(
+          `http://localhost:4000/api/v1/get-book-by-id/${id}`
+        );
         setBookData(response.data.data);
 
         // Fake reviews for testing with avatars
@@ -29,27 +31,42 @@ const BookDetails = () => {
           {
             text: "Great book! Very insightful and engaging.",
             rating: 5,
-            user: { name: "John Doe", avatar: "https://i.pravatar.cc/150?img=1" },
+            user: {
+              name: "Khushi",
+              avatar: "https://i.pravatar.cc/150?img=1",
+            },
           },
           {
             text: "I loved the plot twists. A must-read for thriller fans.",
             rating: 4,
-            user: { name: "Jane Smith", avatar: "https://i.pravatar.cc/150?img=2" },
+            user: {
+              name: "Arun",
+              avatar: "https://i.pravatar.cc/150?img=2",
+            },
           },
           {
             text: "Decent read, but the ending was a bit predictable.",
             rating: 3,
-            user: { name: "Michael Brown", avatar: "https://i.pravatar.cc/150?img=3" },
+            user: {
+              name: "Santoshi",
+              avatar: "https://i.pravatar.cc/150?img=3",
+            },
           },
           {
             text: "Didn't enjoy it as much as I thought I would. The pacing was slow.",
             rating: 2,
-            user: { name: "Emily White", avatar: "https://i.pravatar.cc/150?img=4" },
+            user: {
+              name: "Lucky",
+              avatar: "https://i.pravatar.cc/150?img=4",
+            },
           },
           {
             text: "Not my cup of tea. Felt too cliche.",
             rating: 1,
-            user: { name: "Chris Green", avatar: "https://i.pravatar.cc/150?img=5" },
+            user: {
+              name: "Lisa",
+              avatar: "https://i.pravatar.cc/150?img=5",
+            },
           },
         ];
 
@@ -94,7 +111,9 @@ const BookDetails = () => {
       toast.success("Book added to your cart!");
     } catch (error) {
       console.error("Error adding book to cart:", error);
-      toast.error(error.response?.data?.message || "An error occurred. Try again.");
+      toast.error(
+        error.response?.data?.message || "An error occurred. Try again."
+      );
     }
   };
 
@@ -159,11 +178,31 @@ const BookDetails = () => {
               )}
             </div>
             <div className="p-4 w-full md:w-3/5 space-y-4">
-              <h1 className="font-semibold text-3xl text-zinc-100">{bookData.title}</h1>
+              <h1 className="font-semibold text-3xl text-zinc-100">
+                {bookData.title}
+              </h1>
               <p className="text-lg text-zinc-400">by {bookData.author}</p>
-              <p className="text-sm text-zinc-300 mt-4">{bookData.description}</p>
-              <p className="text-sm text-zinc-400 mt-2">Language: {bookData.language}</p>
-              <p className="font-semibold text-xl text-zinc-100 mt-4">Price: ₹{bookData.price}</p>
+              <p className="text-sm text-zinc-300 mt-4">
+                {bookData.description}
+              </p>
+              <p className="text-sm text-zinc-400 mt-2">
+                Language: {bookData.language}
+              </p>
+              <p className="font-semibold text-xl text-zinc-100 mt-4">
+                <span className="line-through">₹{bookData.price}</span>{" "}
+                <span className="text-green-600 ml-3 ">
+                  {bookData.discountPercent}%
+                </span>
+              </p>
+              <p className="font-semibold text-xl text-zinc-100 mt-4">
+                Price: ₹{bookData.discountedPrice}
+              </p>
+              <button
+                className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 mt-2"
+                onClick={handleCart}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
 
@@ -181,26 +220,34 @@ const BookDetails = () => {
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div>
-                        <div className="font-semibold text-zinc-100">{review.user.name}</div>
+                        <div className="font-semibold text-zinc-100">
+                          {review.user.name}
+                        </div>
                         <div className="flex items-center space-x-2">
                           {[...Array(review.rating)].map((_, i) => (
                             <FaStar key={i} className="text-yellow-400" />
                           ))}
                         </div>
-                        <p className="text-sm text-zinc-300 mt-2">{review.text}</p>
+                        <p className="text-sm text-zinc-300 mt-2">
+                          {review.text}
+                        </p>
                       </div>
                     </div>
                   </div>
                 ))
               ) : (
-                <p className="text-sm text-zinc-400">No reviews yet. Be the first to review this book!</p>
+                <p className="text-sm text-zinc-400">
+                  No reviews yet. Be the first to review this book!
+                </p>
               )}
             </div>
             {isLoggedIn && role === "user" && (
               <form onSubmit={handleReviewSubmit} className="mt-4 space-y-4">
                 <textarea
                   value={newReview.text}
-                  onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
+                  onChange={(e) =>
+                    setNewReview({ ...newReview, text: e.target.value })
+                  }
                   className="w-full p-2 rounded bg-zinc-700 text-white"
                   placeholder="Write your review here..."
                   required
@@ -212,7 +259,9 @@ const BookDetails = () => {
                     <FaStar
                       key={rating}
                       className={`cursor-pointer text-xl ${
-                        newReview.rating >= rating ? "text-yellow-400" : "text-zinc-500"
+                        newReview.rating >= rating
+                          ? "text-yellow-400"
+                          : "text-zinc-500"
                       }`}
                       onClick={() => handleRatingClick(rating)} // Handle star click
                     />

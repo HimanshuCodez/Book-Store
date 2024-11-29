@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import axios from "axios";
 import Cards from '../Cards'
 import Loader from "../Loader/Loader";
+import Footer from "../Footer";
 
 const RelatedBooks = () => {
   const [Data, setData] = useState();
@@ -78,6 +79,7 @@ const RelatedBooks = () => {
               ))}
           </Slider>
         </div>
+        <Footer/>
       </div>
     </>
   );

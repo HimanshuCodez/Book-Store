@@ -1,10 +1,10 @@
 import express from "express";
-import BookRequest from "../models/bookRequest";  // Path to your BookRequest model
+import BookRequest from "../models/bookRequest.model.js";  // Path to your BookRequest model
 
 const router = express.Router();
 
 // Admin route to fetch all book requests
-router.get('/admin/book-requests', async (req, res) => {
+router.get('/admin-book-requests', async (req, res) => {
     try {
         // Fetch all book requests
         const requests = await BookRequest.find()
@@ -21,13 +21,13 @@ router.get('/admin/book-requests', async (req, res) => {
 
 
 
-router.post('/request-book', async (req, res) => {
-    const { userId, bookId } = req.body;
-
+router.post('/user-request-book', async (req, res) => {
+    const {  bookid } = req.body;
+    const { id } = req.headers;
     try {
         const newRequest = new BookRequest({
-            user: userId,
-            book: bookId,
+            user: id,
+            book: bookid,
             status: 'Pending'
         });
 
