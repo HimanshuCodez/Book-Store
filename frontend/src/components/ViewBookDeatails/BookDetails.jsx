@@ -41,7 +41,7 @@ const BookDetails = () => {
             rating: 4,
             user: {
               name: "Arun",
-              avatar: "https://i.pravatar.cc/150?img=2",
+              avatar: "https://i.pravatar.cc/150?img=3",
             },
           },
           {
@@ -49,15 +49,15 @@ const BookDetails = () => {
             rating: 3,
             user: {
               name: "Santoshi",
-              avatar: "https://i.pravatar.cc/150?img=3",
+              avatar: "https://imgs.search.brave.com/PidiBCmLbzqycBzNj14BNU7fYxlZKJqaMj6t7ZoXazM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDEwMTA0/MjQ0LnBuZw",
             },
           },
           {
             text: "Didn't enjoy it as much as I thought I would. The pacing was slow.",
             rating: 2,
             user: {
-              name: "Lucky",
-              avatar: "https://i.pravatar.cc/150?img=4",
+              name: "Rose",
+              avatar: "https://imgs.search.brave.com/kNg2r-YCzaHM034-vPA55ACQdQAOdT-CuTUpjJO2Cok/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGZwcy5nZy9wZnBz/LzU0NTktYmxhY2tw/aW5rLXJvc2UucG5n",
             },
           },
           {
@@ -65,7 +65,7 @@ const BookDetails = () => {
             rating: 1,
             user: {
               name: "Lisa",
-              avatar: "https://i.pravatar.cc/150?img=5",
+              avatar: "https://imgs.search.brave.com/jH9UYNdOBJHnSUWIknuK-rBzTh0-U2n9GHyX2gbFUsI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2FlL2Vk/LzdhL2FlZWQ3YWE3/ZDEyMzUxN2UyOTNh/NWFjZWFmOTBhZDFm/LmpwZw",
             },
           },
         ];
@@ -215,7 +215,7 @@ const BookDetails = () => {
                   <div key={index} className="p-4 bg-zinc-700 rounded-lg">
                     <div className="flex items-center space-x-4">
                       <img
-                        src="https://imgs.search.brave.com/3L58XVCErl9Jwact_9hf94wgnvkan16Acz9ugZpCIj0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wbmdz/ZXQuY29tL2ltYWdl/cy9pbWFnZS1vZi1w/cmluY2Vzcy1idWJi/bGVndW0tcHJvZmls/ZS1wcmVzYWxlLXB1/cnBsZS1sZWlzdXJl/LWFjdGl2aXRpZXMt/YmFkbWludG9uLXN0/b21hY2gtdHJhbnNw/YXJlbnQtcG5nLTY0/NTE2OS5wbmc"
+                        src={review.user.avatar}
                         alt={review.user.name}
                         className="w-10 h-10 rounded-full object-cover"
                       />
