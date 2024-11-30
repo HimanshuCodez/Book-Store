@@ -32,8 +32,8 @@ const BookDetails = () => {
             text: "Great book! Very insightful and engaging.",
             rating: 5,
             user: {
-              name: "Khushi",
-              avatar: "https://i.pravatar.cc/150?img=1",
+              name: "Himanshu",
+              avatar: "https://i.pravatar.cc/150?img=3",
             },
           },
           {
@@ -156,12 +156,12 @@ const BookDetails = () => {
           <div className="flex flex-col md:flex-row gap-8  dark:bg-slate-800 dark:text-white">
             <div className="relative  rounded p-4 h-[60vh] w-full md:w-2/5 flex items-center justify-center">
               <img
-                className="h-[50vh] rounded "
+                className="h-[50vh] rounded bg-black "
                 src={bookData.url}
                 alt={bookData.title || "Book Cover"}
               />
               {isLoggedIn && role === "user" && (
-                <div className="absolute top-4 right-4 flex flex-col space-y-2">
+                <div className="absolute  md:right-7 top-4 right-5 flex flex-col space-y-2">
                   <button
                     className="bg-white text-red-600 rounded-full text-2xl p-2 shadow-md"
                     onClick={handleFavourite}
@@ -194,7 +194,7 @@ const BookDetails = () => {
                   {bookData.discountPercent}%
                 </span>
               </p>
-              <p className="font-semibold text-xl text-zinc-100 mt-4">
+              <p className="font-semibold text-xl  text-black dark:text-white mt-4">
                 Price: ₹{bookData.discountedPrice}
               </p>
               <button
@@ -207,20 +207,20 @@ const BookDetails = () => {
           </div>
 
           {/* Reviews Section */}
-          <div className="bg-zinc-800 p-4 rounded-lg dark:bg-slate-800 dark:text-white">
-            <h2 className="text-2xl font-semibold text-zinc-100">Reviews</h2>
+          <div className="bg-slate-100 text-black p-4 rounded-lg dark:bg-slate-700 dark:text-white">
+            <h2 className="text-2xl font-semibold dark:text-white text-black">Reviews</h2>
             <div className="space-y-4 mt-4">
               {reviews.length > 0 ? (
                 reviews.map((review, index) => (
-                  <div key={index} className="p-4 bg-zinc-700 rounded-lg">
-                    <div className="flex items-center space-x-4">
+                  <div key={index} className="p-4  dark:bg-slate-600 rounded-lg">
+                    <div className="flex items-center space-x-4 ">
                       <img
                         src={review.user.avatar}
                         alt={review.user.name}
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div>
-                        <div className="font-semibold text-zinc-100">
+                        <div className="font-semibold text-black dark:text-white ">
                           {review.user.name}
                         </div>
                         <div className="flex items-center space-x-2">
@@ -228,7 +228,7 @@ const BookDetails = () => {
                             <FaStar key={i} className="text-yellow-400" />
                           ))}
                         </div>
-                        <p className="text-sm text-zinc-300 mt-2">
+                        <p className="text-sm text-slate-700 dark:text-white mt-2">
                           {review.text}
                         </p>
                       </div>
@@ -248,7 +248,7 @@ const BookDetails = () => {
                   onChange={(e) =>
                     setNewReview({ ...newReview, text: e.target.value })
                   }
-                  className="w-full p-2 rounded bg-zinc-700 text-white"
+                  className="w-full p-2 rounded dark:bg-slate-600 "
                   placeholder="Write your review here..."
                   required
                 ></textarea>
@@ -283,7 +283,10 @@ const BookDetails = () => {
           <Loader />
         </div>
       )}
-      <RelatedBooks />
+      <div className="bg-white  rounded-lg dark:bg-slate-800 dark:text-white">
+      <RelatedBooks  />
+      </div>
+     
     </>
   );
 };

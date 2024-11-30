@@ -59,18 +59,18 @@ const RelatedBooks = () => {
 
   return (
     <>
-      <div className="bg-zinc-900 max-w-screen-2xl container mx-auto md:px-20 px-4 py-8">
+      <div className="bg-white p-4 rounded-lg dark:bg-slate-800 dark:text-white max-w-screen-2xl container mx-auto md:px-20 px-4 py-8">
         <div>
           <h1 className="font-semibold text-xl pb-2 text-white">Related Books</h1>
         </div>
 
-        <div className="bg-zinc-900">
+        <div className="rounded-lg bg-slate-50 dark:bg-slate-800 dark:text-white">
           {!Data && (
             <div className="flex items-center justify-center my-8">
               <Loader />
             </div>
           )}
-          <Slider className="bg-zinc-900" {...settings}>
+          <Slider className="" {...settings}>
             {Data &&
               Data.map((item, i) => (
                 <div key={i}>
@@ -79,7 +79,7 @@ const RelatedBooks = () => {
               ))}
           </Slider>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
