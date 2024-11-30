@@ -67,7 +67,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
+    <div className="p-8 bg-gray-50 min-h-screen dark:bg-slate-800 dark:text-white">
       <h1 className="text-3xl font-semibold text-gray-800 mt-8 mb-8 text-center">
         Your Cart
       </h1>
@@ -83,11 +83,11 @@ const Cart = () => {
       ) : (
         <div>
           {/* Cart items */}
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             {cart.map((item) => (
               <div
                 key={item._id}
-                className="flex items-center justify-between bg-white p-4 rounded shadow-md"
+                className="flex items-center justify-between dark:bg-slate-800 dark:text-white p-4 rounded shadow-md"
               >
                 {/* Book Info */}
                 <div className="flex items-center space-x-4">
@@ -98,9 +98,9 @@ const Cart = () => {
                   />
                   <div>
                     <h2 className="text-lg font-semibold text-gray-800">
-                      {item.name}
+                      {item.name || "no name available"}
                     </h2>
-                    <p className="text-gray-500">
+                    <p className="text-gray-500 dark:text-white">
                       Price: {formatCurrency(item.price)}
                     </p>
                   </div>

@@ -52,22 +52,22 @@ const BookDetails = () => {
               avatar: "https://imgs.search.brave.com/PidiBCmLbzqycBzNj14BNU7fYxlZKJqaMj6t7ZoXazM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDEwMTA0/MjQ0LnBuZw",
             },
           },
-          {
-            text: "Didn't enjoy it as much as I thought I would. The pacing was slow.",
-            rating: 2,
-            user: {
-              name: "Rose",
-              avatar: "https://imgs.search.brave.com/kNg2r-YCzaHM034-vPA55ACQdQAOdT-CuTUpjJO2Cok/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGZwcy5nZy9wZnBz/LzU0NTktYmxhY2tw/aW5rLXJvc2UucG5n",
-            },
-          },
-          {
-            text: "Not my cup of tea. Felt too cliche.",
-            rating: 1,
-            user: {
-              name: "Lisa",
-              avatar: "https://imgs.search.brave.com/jH9UYNdOBJHnSUWIknuK-rBzTh0-U2n9GHyX2gbFUsI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2FlL2Vk/LzdhL2FlZWQ3YWE3/ZDEyMzUxN2UyOTNh/NWFjZWFmOTBhZDFm/LmpwZw",
-            },
-          },
+          // {
+          //   text: "Didn't enjoy it as much as I thought I would. The pacing was slow.",
+          //   rating: 2,
+          //   user: {
+          //     name: "Rose",
+          //     avatar: "https://imgs.search.brave.com/kNg2r-YCzaHM034-vPA55ACQdQAOdT-CuTUpjJO2Cok/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGZwcy5nZy9wZnBz/LzU0NTktYmxhY2tw/aW5rLXJvc2UucG5n",
+          //   },
+          // },
+          // {
+          //   text: "Not my cup of tea. Felt too cliche.",
+          //   rating: 1,
+          //   user: {
+          //     name: "Lisa",
+          //     avatar: "https://imgs.search.brave.com/jH9UYNdOBJHnSUWIknuK-rBzTh0-U2n9GHyX2gbFUsI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2FlL2Vk/LzdhL2FlZWQ3YWE3/ZDEyMzUxN2UyOTNh/NWFjZWFmOTBhZDFm/LmpwZw",
+          //   },
+          // },
         ];
 
         setReviews(fakeReviews); // Set the fake reviews with avatars
@@ -151,12 +151,12 @@ const BookDetails = () => {
     <>
       <Navbar />
       {bookData ? (
-        <div className="px-4 md:px-12 py-8 bg-zinc-900 flex flex-col gap-8">
+        <div className="px-4 mt-6 md:px-12 py-8 dark:bg-slate-800 dark:text-white flex flex-col gap-8">
           {/* Book Image and Details Section */}
-          <div className="flex flex-col md:flex-row gap-8">
-            <div className="relative bg-zinc-700 rounded p-4 h-[60vh] w-full md:w-2/5 flex items-center justify-center">
+          <div className="flex flex-col md:flex-row gap-8  dark:bg-slate-800 dark:text-white">
+            <div className="relative  rounded p-4 h-[60vh] w-full md:w-2/5 flex items-center justify-center">
               <img
-                className="h-[50vh] rounded"
+                className="h-[50vh] rounded "
                 src={bookData.url}
                 alt={bookData.title || "Book Cover"}
               />
@@ -178,18 +178,18 @@ const BookDetails = () => {
               )}
             </div>
             <div className="p-4 w-full md:w-3/5 space-y-4">
-              <h1 className="font-semibold text-3xl text-zinc-100">
-                {bookData.title}
+              <h1 className="font-semibold text-3xl text-black dark:text-white">
+                {bookData.name || "not available"}
               </h1>
-              <p className="text-lg text-zinc-400">by {bookData.author}</p>
-              <p className="text-sm text-zinc-300 mt-4">
+              <p className="text-lg text-black dark:text-white">by : {bookData.author}</p>
+              <p className="text-sm text-slate-900 dark:text-zinc-300 mt-4">
                 {bookData.description}
               </p>
-              <p className="text-sm text-zinc-400 mt-2">
+              <p className="text-sm text-slate-900 dark:text-zinc-300 mt-2">
                 Language: {bookData.language}
               </p>
-              <p className="font-semibold text-xl text-zinc-100 mt-4">
-                <span className="line-through">₹{bookData.price}</span>{" "}
+              <p className="font-semibold text-xl text-black dark:text-white mt-4">
+                <span className="line-through text-black dark:text-white">₹{bookData.price}</span>{" "}
                 <span className="text-green-600 ml-3 ">
                   {bookData.discountPercent}%
                 </span>
@@ -207,7 +207,7 @@ const BookDetails = () => {
           </div>
 
           {/* Reviews Section */}
-          <div className="bg-zinc-800 p-4 rounded-lg">
+          <div className="bg-zinc-800 p-4 rounded-lg dark:bg-slate-800 dark:text-white">
             <h2 className="text-2xl font-semibold text-zinc-100">Reviews</h2>
             <div className="space-y-4 mt-4">
               {reviews.length > 0 ? (
