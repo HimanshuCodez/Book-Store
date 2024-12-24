@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi"; // Importing the delete icon from react-icons
 import toast from "react-hot-toast";
 import Loader from "./Loader/Loader";
@@ -49,7 +49,22 @@ const Cart = () => {
       toast.error("Failed to remove item from cart.");
     }
   };
-
+  const PlaceOrder = async () => {
+    try {
+     const response = await axios.post(
+        `http://localhost:4000/api/v1/place-order`,
+        {order:cart},
+        { headers }
+      );
+      // Update cart state after removal
+      
+console.log(response)
+      
+    } catch (error) {
+      console.error("Error in place order:", error);
+      toast.error("Failed");
+    }
+  };
   useEffect(() => {
     if (cart.length > 0) {
       const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
@@ -127,13 +142,11 @@ const Cart = () => {
 
           {/* Checkout Button */}
           <div className="flex justify-end mt-6">
-            <Link
-              to="/checkout"
-              state={{ cart, total }}
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
-            >
-              Proceed to Checkout
-            </Link>
+          <div onClick={PlaceOrder} className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold">
+
+             Place Order
+          </div>
+           
           </div>
         </div>
       )}

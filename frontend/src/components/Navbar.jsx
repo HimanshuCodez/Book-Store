@@ -45,7 +45,7 @@ const location = useLocation();
 
   return (
     <div
-      className={`max-w-screen-2xl font-bold container mx-auto md:px-20 mt-6 px-4 dark:bg-slate-800 dark:text-white fixed top-0 left-0 right-0 z-50 ${
+      className={`max-w-screen-2xl font-bold container mx-auto md:px-20 mt-1 px-4 dark:bg-slate-800 dark:text-white fixed top-0 left-0 right-0 z-50 ${
         sticky ? "sticky-navbar shadow-md bg-slate-100 duration-300" : ""
       }`}
     >
@@ -180,14 +180,12 @@ const location = useLocation();
               >
                 Login
               </button>
-              <button
+              <Link to={"/sign-up"}
                 className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 duration-300"
-                onClick={() =>
-                  document.getElementById("signup-modal").showModal()
-                }
+                
               >
                 Signup
-              </button>
+              </Link>
               <Login />
             </div>
           )}

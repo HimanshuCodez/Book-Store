@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 const bookSchema =new mongoose.Schema({
 url:{
     type: String,
-    required: true,
-    
+    required: true, 
 },
 title:{    
     type: String,
@@ -25,6 +24,7 @@ title:{
     type: String,
     required: true,
  },
+ isbn: { type: String, unique: true },
 
 },{timestamps:true})
 //model

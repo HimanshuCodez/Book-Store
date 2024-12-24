@@ -135,12 +135,12 @@ function Signup() {
               </button>
               <p className="text-xl">
                 Have an account?{" "}
-                <span
+              <Link  to={"/sign-in"}
                   className="underline text-blue-500 cursor-pointer"
-                  onClick={openLoginModal} // Open login modal
+                  
                 >
                   Login
-                </span>
+              </Link>
               </p>
             </div>
           </form>
