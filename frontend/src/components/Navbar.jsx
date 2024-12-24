@@ -14,7 +14,7 @@ const Navbar = () => {
   const element = document.documentElement;
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const user = useSelector((state) => state.auth.user); // Assuming `user` has profile info like avatar
-const location = useLocation();
+  const location = useLocation();
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
@@ -51,11 +51,9 @@ const location = useLocation();
     >
       <div className="navbar ">
         <div className="navbar-start">
-      
-  <Link to="/" className="text-2xl font-bold cursor-pointer">
-    Bookish
-  </Link>
-
+          <Link to="/" className="text-2xl font-bold cursor-pointer">
+            Bookish
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -134,14 +132,7 @@ const location = useLocation();
                         Profile
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        to="/profile/favourites"
-                        className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
-                      >
-                        Favourites
-                      </Link>
-                    </li>
+                    
                     <li>
                       <Link
                         to="/profile/orders"
@@ -172,21 +163,21 @@ const location = useLocation();
             </div>
           ) : (
             <div className="flex space-x-3">
+              <Link to={"/sign-in"}>
               <button
                 className="bg-black text-white px-3 py-2 rounded-md hover:bg-gray-800 duration-300"
-                onClick={() =>
-                  document.getElementById("login-modal").showModal()
-                }
+                
               >
                 Login
               </button>
-              <Link to={"/sign-up"}
+              </Link>
+              <Link
+                to={"/sign-up"}
                 className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 duration-300"
-                
               >
                 Signup
               </Link>
-              <Login />
+             
             </div>
           )}
         </div>
