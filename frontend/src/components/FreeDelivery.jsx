@@ -19,11 +19,11 @@ const sliderSettings = {
 
 const FreeDeliveryBanner = () => {
   return (
-    <div className="bg-purple-600 text-white text-center sticky top-0 z-50">
+    <div className="bg-purple-600 text-white text-center h-5 sticky top-0 z-50">
       <Slider {...sliderSettings}>
         {messages.map((message, index) => (
           <div key={index}>
-            <p className="text-lg font-semibold">{message}</p>
+            <p className=" mb-5 font-semibold">{message}</p>
           </div>
         ))}
       </Slider>

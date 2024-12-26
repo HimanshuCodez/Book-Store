@@ -12,11 +12,6 @@ function Signup() {
     password: "",
     address: "",
   });
-  
-  // State for modal visibility
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); 
-
-  // Hook to navigate to other pages
   const navigate = useNavigate();
 
   // Handle input changes
@@ -50,17 +45,6 @@ function Signup() {
       toast.error("User Already Exixts");
     }
   };
-
-  // Open login modal
-  const openLoginModal = () => {
-    setIsLoginModalOpen(true);
-  };
-
-  // Close login modal
-  const closeLoginModal = () => {
-    setIsLoginModalOpen(false);
-  };
-
   return (
     <div className="dark:bg-slate-900 dark:text-white flex h-screen items-center justify-center bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200">
     <div className="w-[600px]">

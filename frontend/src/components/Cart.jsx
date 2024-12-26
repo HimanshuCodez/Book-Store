@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom";
-import { FiTrash2 } from "react-icons/fi"; // Importing the delete icon from react-icons
+import { Link, useNavigate } from "react-router-dom";
+import { FiTrash2 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import Loader from "./Loader/Loader";
 
@@ -10,6 +10,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const navigate = useNavigate();
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -23,10 +24,10 @@ const Cart = () => {
           { headers }
         );
         setCart(response.data.data || []); // Set cart data or an empty array
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching cart books:", error);
         toast.error("Failed to fetch cart items.");
+      } finally {
         setLoading(false);
       }
     };
@@ -41,37 +42,17 @@ const Cart = () => {
         {},
         { headers }
       );
-      // Update cart state after removal
-      setCart((prevCart) => prevCart.filter((item) => item._id !== bookId)); // Remove item from the cart in the state
+      setCart((prevCart) => prevCart.filter((item) => item._id !== bookId));
       toast.success("Removed from cart");
     } catch (error) {
       console.error("Error removing item from cart:", error);
       toast.error("Failed to remove item from cart.");
     }
   };
-  const PlaceOrder = async () => {
-    try {
-     const response = await axios.post(
-        `http://localhost:4000/api/v1/place-order`,
-        {order:cart},
-        { headers }
-      );
-      // Update cart state after removal
-      
-console.log(response)
-      
-    } catch (error) {
-      console.error("Error in place order:", error);
-      toast.error("Failed");
-    }
-  };
+
   useEffect(() => {
-    if (cart.length > 0) {
-      const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
-      setTotal(totalAmount);
-    } else {
-      setTotal(0);
-    }
+    const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+    setTotal(totalAmount);
   }, [cart]);
 
   const formatCurrency = (amount) => {
@@ -79,6 +60,10 @@ console.log(response)
       style: "currency",
       currency: "INR",
     }).format(amount);
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { cart, total } });
   };
 
   return (
@@ -98,7 +83,7 @@ console.log(response)
       ) : (
         <div>
           {/* Cart items */}
-          <div className="space-y-6 ">
+          <div className="space-y-6">
             {cart.map((item) => (
               <div
                 key={item._id}
@@ -142,11 +127,12 @@ console.log(response)
 
           {/* Checkout Button */}
           <div className="flex justify-end mt-6">
-          <div onClick={PlaceOrder} className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold">
-
-             Place Order
-          </div>
-           
+            <button
+              onClick={handleCheckout}
+              className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
+            >
+              Proceed To Pay
+            </button>
           </div>
         </div>
       )}

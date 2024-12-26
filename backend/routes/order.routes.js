@@ -8,28 +8,47 @@ const router = express.Router();
 //for users
 router.post('/place-order', authenticateToken, async (req, res) => {
     try {
-        const { id } = req.headers;
-        const { order } = req.body;
+        const { id } = req.headers;  // User ID
+        console.log("User ID:", id);
+
+        const { order } = req.body;  // Order data
+        console.log("Order Data:", order);
+
+        // Loop through each order item
         for (const orderData of order) {
-            const newOrder = new Order({ user: id, book: orderData._id });
+            // Create a new order object
+            const newOrder = new Order({
+                user: id, 
+                book: orderData._id,
+                status: 'Order Placed',
+            });
+
+            // Save the order to the database
             const orderDataFromdb = await newOrder.save();
-            //saving order in db
+            console.log("Order saved to DB:", orderDataFromdb);
+
+            // Update user's orders collection
             await User.findByIdAndUpdate(id, {
                 $push: { orders: orderDataFromdb._id },
             });
-            //clearing cart
+            console.log("User's orders updated");
+
+            // Remove book from user's cart after placing the order
             await User.findByIdAndUpdate(id, {
                 $pull: { cart: orderData._id },
             });
+            console.log("Book removed from user's cart");
         }
+
+        // Send success response
         res.status(200).json({ message: "Order placed successfully" });
     } catch (error) {
         console.error("Error during order placement:", error);
-        res.status(500).json({ message: "place order error" });
+        res.status(500).json({ message: "Place order error" });
     }
-}
+});
 
-)
+
 
 router.get('/get-order-history', authenticateToken, async (req, res) => {
 

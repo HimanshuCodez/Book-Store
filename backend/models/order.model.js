@@ -5,11 +5,6 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',     
     },
-    // quantity: {
-    //     type: Number,
-    //     required: true, // Ensure quantity is provided when placing an order
-    //     default: 1 // Default to 1 if not specified
-    // },
     book: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'books', 

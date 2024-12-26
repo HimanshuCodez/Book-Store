@@ -25,15 +25,15 @@ const userSchema = new mongoose.Schema({
       default: 'user'
     },
     favourites:[{ 
-      type : mongoose.Types.ObjectId,
+      type : mongoose.Schema.Types.ObjectId,
       ref : "books",
    },],
     cart:[{ 
-      type : mongoose.Types.ObjectId,
+      type : mongoose.Schema.Types.ObjectId,
       ref : "books",
    },],
     orders:[{ 
-      type : mongoose.Types.ObjectId,
+      type : mongoose.Schema.Types.ObjectId,
       ref : "order",
    },],
 },
