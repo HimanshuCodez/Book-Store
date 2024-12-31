@@ -31,7 +31,8 @@ app.use("/api/v1",favouriteRoute)
 app.use("/api/v1",cartRoute)
 app.use("/api/v1",orderRoute)
 app.use("/api/v1",bookRequestRoute)
-app.use("/api/v1/payment", paymentRoute);
+app.use("/api/v1", paymentRoute);
+
 
 
 

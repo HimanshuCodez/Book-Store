@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import Loader from "./Loader/Loader";
+import {loadStripe} from '@stripe/stripe-js';
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -62,9 +63,32 @@ const Cart = () => {
     }).format(amount);
   };
 
-  const handleCheckout = () => {
-    navigate("/checkout", { state: { cart, total } });
+  const handleCheckout = async () => {
+
+    const stripePromise = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/checkout",
+        { cartItems: cart }, // Send cart items in the body
+        { headers } // Pass headers in the config
+      );
+      const responseData = await response.json()
+      if (responseData?.id) {
+        stripePromise.redirectToCheckout({sessionId : responseData.id})
+        
+      }
+      
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        toast.error("Unauthorized! Please log in again.");
+        console.error("Checkout error:", error.response.data.message);
+      } else {
+        toast.error("An error occurred during checkout.");
+        console.error("Checkout error:", error);
+      }
+    }
   };
+  
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen dark:bg-slate-800 dark:text-white">

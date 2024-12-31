@@ -1,36 +1,59 @@
-import express  from "express";
-import Stripe from "stripe";
+import express from 'express';
+import User from "../models/user.model.js";
+import stripe from "../stripe.js";
+import authenticateToken from './userAuth.routes.js';
 const router = express.Router();
-import dotenv  from "dotenv";
+router.post('/checkout', authenticateToken, async(req,res)=>{
+try {
+  const {cartItems} =req.body
 
-dotenv.config();
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  console.log("cart items", cartItems);
+  const { id } = req.headers;
 
-// Create Payment Intent
-router.post("/create-payment-intent", async (req, res) => {
-    const { amount, currency } = req.body;
-  
-    if (!amount || !currency) {
-      return res.status(400).json({ success: false, message: "Amount and currency are required" });
+
+ const user = await User.findOne({id})
+ 
+  if(!user){
+    return res.status(404).json({ message: "User not found" });
+  }
+
+
+const params= {
+submit_type : 'pay',
+mode : "payment",
+payment_method_types :['card'],
+billing_address_collection :'auto',
+shipping_options:[
+  {
+    shipping_rate :"shr_1QbyxKEb71cybCjRzk0FBevK"
+  }
+],
+customer_email : user.email,
+
+line_items: cartItems.map((item,index)=>{
+  return {
+    price_data :{
+      currency : 'inr',
+      product_data :{
+        name : item.title,
+        images : [item.url],
+        description : item.description,
+        amount : item.price * 100
+      },
+      quantity : item.quantity
     }
-  
-    try {
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: amount * 100, // Stripe expects the amount in cents
-        currency,
-        payment_method_types: ["card"], // Accept card payments
-      });
-  
-      res.status(200).json({
-        success: true,
-        clientSecret: paymentIntent.client_secret,
-      });
-    } catch (error) {
-      console.error("Error creating payment intent:", error); // Logs full error details
-      res.status(500).json({ success: false, error: error.message }); // Include error message for debugging
-    }
-  });
-  
+  }
+}),
+success_url : `${process.env.FRONTEND_URL}/success`,
+cancel_url : `${process.env.FRONTEND_URL}/cancel`
+}
+  const session = await stripe.checkout.sessions.create(params)
+res.status(303).json(session)
 
+}  catch (error) {
+  console.log('payment controller', error);
+  res.status(500).json(error);
+}
+});
 export default router;
