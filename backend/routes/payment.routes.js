@@ -1,4 +1,3 @@
-// Backend route (checkout.routes.js)
 import express from 'express';
 import User from "../models/user.model.js";
 import stripe from "../stripe.js";
@@ -39,12 +38,16 @@ router.post('/checkout', authenticateToken, async(req,res) => {
         },
         quantity: item.quantity || 1,
       })),
-      success_url: `${process.env.FRONTEND_URL}/success`,
+      metadata: {
+        userId: userId,
+        cartItems: JSON.stringify(cartItems.map(item => item._id))
+      },
+      success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     };
     
     const session = await stripe.checkout.sessions.create(params);
-    res.status(200).json({ id: session.id }); // Changed status code and response format
+    res.status(200).json({ id: session.id });
   } catch (error) {
     console.error('Payment route error:', error);
     res.status(500).json({ error: error.message });

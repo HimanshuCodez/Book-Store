@@ -11,7 +11,6 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
-
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -70,25 +69,25 @@ const Cart = () => {
       if (!stripe) {
         throw new Error('Stripe failed to load');
       }
-  
+
       const response = await axios.post(
         "http://localhost:4000/api/v1/checkout",
         { cartItems: cart },
         { headers }
       );
-  
-      const { id: sessionId } = response.data; // Access data directly from axios response
-  
+
+      const { id: sessionId } = response.data;
+
       if (!sessionId) {
         throw new Error('No session ID received');
       }
-  
+
       toast.loading("Redirecting to checkout...");
       
       const result = await stripe.redirectToCheckout({
         sessionId: sessionId
       });
-  
+
       if (result.error) {
         toast.error(result.error.message);
       }
@@ -97,7 +96,6 @@ const Cart = () => {
       toast.error('Checkout failed. Please try again.');
     }
   };
-  
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen dark:bg-slate-800 dark:text-white">

@@ -3,44 +3,40 @@ import User from '../models/user.model.js';
 import Book from '../models/book.model.js';
 import Order from '../models/order.model.js';
 import authenticateToken from './userAuth.routes.js';
-
+import stripe from "../stripe.js";
 const router = express.Router();
 //for users
 router.post('/place-order', authenticateToken, async (req, res) => {
     try {
-        const { id } = req.headers;  // User ID
-        console.log("User ID:", id);
+        const { session_id } = req.body;
+        
+        // Verify payment was successful
+        const session = await stripe.checkout.sessions.retrieve(session_id);
+        
+        if (session.payment_status !== 'paid') {
+            return res.status(400).json({ message: "Payment not successful" });
+        }
 
-        const { order } = req.body;  // Order data
-        console.log("Order Data:", order);
+        const userId = session.metadata.userId;
+        const cartItemIds = JSON.parse(session.metadata.cartItems);
 
-        // Loop through each order item
-        for (const orderData of order) {
-            // Create a new order object
+        // Create orders for each item
+        for (const bookId of cartItemIds) {
             const newOrder = new Order({
-                user: id, 
-                book: orderData._id,
+                user: userId,
+                book: bookId,
                 status: 'Order Placed',
             });
 
-            // Save the order to the database
             const orderDataFromdb = await newOrder.save();
-            console.log("Order saved to DB:", orderDataFromdb);
 
-            // Update user's orders collection
-            await User.findByIdAndUpdate(id, {
+            // Update user's orders and remove from cart
+            await User.findByIdAndUpdate(userId, {
                 $push: { orders: orderDataFromdb._id },
+                $pull: { cart: bookId }
             });
-            console.log("User's orders updated");
-
-            // Remove book from user's cart after placing the order
-            await User.findByIdAndUpdate(id, {
-                $pull: { cart: orderData._id },
-            });
-            console.log("Book removed from user's cart");
         }
 
-        // Send success response
         res.status(200).json({ message: "Order placed successfully" });
     } catch (error) {
         console.error("Error during order placement:", error);

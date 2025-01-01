@@ -19,6 +19,7 @@ import AdminBookRequests from "./components/Admin/bookRequest";
 import UserBookRequest from "./components/RequestBook";
 import ReviewCart from "./components/ReviewCart";
 import Checkout from "./components/Checkout";
+import Success from "./components/success";
 // import Orders from "./components/Orders";
 
 
@@ -61,6 +62,7 @@ const App = () => {
 
           <Route path="/place-order" element={<ReviewCart />} />
           <Route path="/checkout" element={<Checkout/>} />
+          <Route path="/success" element={<Success/>} />
           {/* <Route path="orders" element={<Orders/>} /> */}
           <Route path="/view-book-details/:id" element={<BookDetails />} />
         </Routes>
