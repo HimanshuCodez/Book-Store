@@ -11,7 +11,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate();
+
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -64,28 +64,37 @@ const Cart = () => {
   };
 
   const handleCheckout = async () => {
-
-    const stripePromise = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY);
     try {
+      const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY);
+      
+      if (!stripe) {
+        throw new Error('Stripe failed to load');
+      }
+  
       const response = await axios.post(
         "http://localhost:4000/api/v1/checkout",
-        { cartItems: cart }, // Send cart items in the body
-        { headers } // Pass headers in the config
+        { cartItems: cart },
+        { headers }
       );
-      const responseData = await response.json()
-      if (responseData?.id) {
-        stripePromise.redirectToCheckout({sessionId : responseData.id})
-        
+  
+      const { id: sessionId } = response.data; // Access data directly from axios response
+  
+      if (!sessionId) {
+        throw new Error('No session ID received');
       }
+  
+      toast.loading("Redirecting to checkout...");
       
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        toast.error("Unauthorized! Please log in again.");
-        console.error("Checkout error:", error.response.data.message);
-      } else {
-        toast.error("An error occurred during checkout.");
-        console.error("Checkout error:", error);
+      const result = await stripe.redirectToCheckout({
+        sessionId: sessionId
+      });
+  
+      if (result.error) {
+        toast.error(result.error.message);
       }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast.error('Checkout failed. Please try again.');
     }
   };
   
