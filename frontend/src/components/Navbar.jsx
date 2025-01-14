@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Login from "./Login";
-import Logout from "./Logout";
 import { useLocation } from "react-router-dom";
 import { authActions } from "../store/auth";
 import { FaUserCircle } from "react-icons/fa"; // Icon for user profile in case avatar is unavailable
+import { TbLogout } from "react-icons/tb";
 
-const Navbar = (cart =[]) => {
+const Navbar = (cart = []) => {
   const dispatch = useDispatch();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -38,20 +37,15 @@ const Navbar = (cart =[]) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLogout = () => {
-    dispatch(authActions.logout()); // Replace with your actual logout logic
-    setDropdownOpen(false);
-  };
-
   return (
     <div
       className={`max-w-screen-2xl font-bold container mx-auto md:px-20 mt-1 px-4 dark:bg-slate-800 dark:text-white fixed top-0 left-0 right-0 z-50 ${
         sticky ? "sticky-navbar shadow-md bg-slate-100 duration-300" : ""
       }`}
     >
-      <div className="navbar ">
+      <div className="navbar  mt-2">
         <div className="navbar-start">
-          <Link to="/" className="text-2xl font-bold cursor-pointer">
+          <Link to="/" className="text-2xl   font-bold cursor-pointer">
             Bookish
           </Link>
         </div>
@@ -151,10 +145,17 @@ const Navbar = (cart =[]) => {
                     </li>
                     <li>
                       <button
-                        onClick={handleLogout}
-                        className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-200 dark:hover:bg-gray-700"
+                        className="w-full text-red-600 hover:bg-gray-200  dark:hover:bg-gray-700 p-3 rounded-md  transition-all duration-300  font-medium flex items-center justify-between"
+                        onClick={() => {
+                          dispatch(authActions.logout());
+                          dispatch(authActions.changeRole("user"));
+                          localStorage.clear("id");
+                          localStorage.clear("token");
+                          localStorage.clear("role");
+                          navigate("/");
+                        }}
                       >
-                        Logout
+                        Logout <TbLogout className="ml-2" />
                       </button>
                     </li>
                   </ul>

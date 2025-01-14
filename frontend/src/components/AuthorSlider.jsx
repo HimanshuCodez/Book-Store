@@ -46,7 +46,7 @@ const sliderSettings = {
   
   infinite: true,
   speed: 500,
-  slidesToShow: 5,
+  slidesToShow: 4,
   slidesToScroll: 1,
   swipe: true,
   swipeToSlide: true, // Allows users to swipe through slides
@@ -80,12 +80,12 @@ const AuthorSlider = () => {
         {authors.map((author) => (
           <div
             key={author.id}
-            className="flex flex-col items-center bg-white dark:bg-slate-700 shadow-md rounded-lg p-4 space-y-4"
+            className="flex   lg:ml-14 pl-24 flex-col items-center  dark:bg-slate-700 shadow-md rounded-lg p-4 space-y-4"
           >
             <img
               src={author.avatar}
               alt={author.name}
-              className="w-24 h-24 rounded-full object-cover"
+              className="w-24 h-24 ml-7 rounded-full object-cover"
             />
             <h3 className="text-lg font-semibold">{author.name}</h3>
             <p className="text-gray-600 dark:text-gray-300">

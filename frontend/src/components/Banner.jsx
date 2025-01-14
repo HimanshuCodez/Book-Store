@@ -1,5 +1,5 @@
 import React from "react";
-import banner2 from "../../public/banner2.png";
+import file from "../../public/file.png";
 import FreeDeliveryBanner from "./FreeDelivery";
 import { Link } from "react-router-dom";
 const Banner = () => {
@@ -40,7 +40,7 @@ const Banner = () => {
             </Link>
           </div>
           <div className=" order-1 w-full md:w-1/2">
-            <img src={banner2} alt="" />
+            <img src={file} alt="" />
           </div>
         </div>
       </div>
