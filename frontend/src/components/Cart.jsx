@@ -122,7 +122,7 @@ const Cart = () => {
       console.log('Cart data loaded:', cart);
       // Verify each item has required fields
       cart.forEach((item, index) => {
-        if (!item.name) {
+        if (!item.name){
           console.warn(`Warning: Item at index ${index} is missing name:`, item);
         }
         if (typeof item.price === 'undefined') {
@@ -176,7 +176,7 @@ const Cart = () => {
                       /></Link>
                       <div className="flex-1 text-center sm:text-left">
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-                          {item.name || "No name "}
+                          {item.name|| "No name "}
                         </h2>
                         <p className="text-purple-600 dark:text-purple-400 text-lg font-medium mb-4">
                           {formatCurrency(item.price)}

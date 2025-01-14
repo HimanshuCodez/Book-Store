@@ -4,7 +4,7 @@ url:{
     type: String,
     required: true, 
 },
-title:{    
+name:{    
     type: String,
     required: true,
  },

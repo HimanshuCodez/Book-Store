@@ -8,6 +8,7 @@ const headers ={
   id: localStorage.getItem("id"),
   authorization: `Bearer ${localStorage.getItem("token")}`,
 }
+const user = 
   useEffect(() => {
     const fetchOrderHistory = async () => {
       try {
@@ -39,8 +40,8 @@ const headers ={
               <p className="font-semibold text-gray-700"> {order.url}</p>
               <p className="font-semibold text-gray-700">Order ID: {order._id}</p>
               <p className="text-sm text-gray-500">Date: {new Date(order.createdAt).toLocaleDateString()}</p>
-              <p className="text-sm text-gray-500">Paid: ₹{order.price}</p>
-              <p className="text-sm text-gray-500">Status: {order.status}</p>
+              <p className="text-sm text-gray-500">Mode: {"COD"}</p>
+              <p className="text-sm ">Status: <span className="text-green-500">{order.status}</span></p>
             </li>
           ))}
         </ul>
