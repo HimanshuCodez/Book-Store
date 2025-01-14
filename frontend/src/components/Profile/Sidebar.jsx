@@ -5,36 +5,44 @@ import { MdClose } from "react-icons/md";
 import { FiMoreHorizontal } from "react-icons/fi";
 
 const Sidebar = ({ profile }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);  // Changed to false by default for mobile
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="mt-4 mx-4"> {/* Wrapper for consistent margins */}
+    <>
+      {/* Overlay for mobile */}
       {isOpen && (
-        <div
-          className="bg-gray-800 text-white p-6 w-full md:w-64 md:fixed top-16 left-4 bottom-4 flex flex-col shadow-lg z-50 rounded-lg"
-          style={{ height: "calc(100vh - 80px)" }} // Adjust height for navbar and margin
-        >
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className={`fixed md:translate-x-0 transition-transform duration-300 ease-in-out ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      } top-0 left-0 h-full md:top-16 md:left-4 z-40`}>
+        <div className="bg-gray-800 text-white p-6 h-full md:h-[calc(100vh-80px)] w-[280px] md:w-64 md:rounded-lg shadow-lg">
           {/* Close Button */}
           <button
             onClick={toggleSidebar}
-            className="absolute top-4 right-4 text-gray-400 hover:text-white md:hidden z-60"
+            className="absolute top-4 right-4 text-gray-400 hover:text-white md:hidden"
           >
             <MdClose size={24} />
           </button>
 
           {/* User's Profile Section */}
-          <div className="flex flex-col items-center mb-8">
+          <div className="flex flex-col items-center mb-8 mt-8 md:mt-0">
             <img
-              src={profile.avatar || "/path/to/default/avatar.jpg"}
+              src={profile?.avatar || "/api/placeholder/100/100"}
               alt="User Profile"
               className="w-14 h-14 rounded-full border-2 border-white mb-4"
             />
-            <h3 className="text-lg font-semibold">{profile.username}</h3>
-            <p className="text-xs text-gray-400">{profile.email}</p>
+            <h3 className="text-lg font-semibold">{profile?.username || "User"}</h3>
+            <p className="text-xs text-gray-400">{profile?.email || "email@example.com"}</p>
           </div>
 
           {/* Sidebar Navigation Links */}
@@ -44,6 +52,7 @@ const Sidebar = ({ profile }) => {
                 <Link
                   to="/profile"
                   className="block p-3 rounded-md hover:bg-gray-700 transition-all duration-300 text-sm font-medium"
+                  onClick={() => window.innerWidth < 768 && toggleSidebar()}
                 >
                   Favourites
                 </Link>
@@ -52,6 +61,7 @@ const Sidebar = ({ profile }) => {
                 <Link
                   to="/profile/orderHistory"
                   className="block p-3 rounded-md hover:bg-gray-700 transition-all duration-300 text-sm font-medium"
+                  onClick={() => window.innerWidth < 768 && toggleSidebar()}
                 >
                   Order History
                 </Link>
@@ -60,6 +70,7 @@ const Sidebar = ({ profile }) => {
                 <Link
                   to="/profile/settings"
                   className="block p-3 rounded-md hover:bg-gray-700 transition-all duration-300 text-sm font-medium"
+                  onClick={() => window.innerWidth < 768 && toggleSidebar()}
                 >
                   Settings
                 </Link>
@@ -74,18 +85,18 @@ const Sidebar = ({ profile }) => {
             </button>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* Open Sidebar Button - Three Dots */}
-      {!isOpen && (
-        <button
-          onClick={toggleSidebar}
-          className="fixed top-20 left-4 bg-gray-800 text-white p-2 rounded-md shadow-lg hover:bg-gray-700 transition-all duration-300 md:hidden z-50"
-        >
-          <FiMoreHorizontal size={24} /> {/* Three-dot icon */}
-        </button>
-      )}
-    </div>
+      {/* Toggle Button */}
+      <button
+        onClick={toggleSidebar}
+        className={`fixed top-20 left-4 bg-gray-800 text-white p-2 rounded-md shadow-lg hover:bg-gray-700 transition-all duration-300 md:hidden z-50 ${
+          isOpen ? 'hidden' : 'block'
+        }`}
+      >
+        <FiMoreHorizontal size={24} />
+      </button>
+    </>
   );
 };
 

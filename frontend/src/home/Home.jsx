@@ -9,12 +9,15 @@ import FreeDeliveryBanner from "../components/FreeDelivery";
 const Home = () => {
   return (
     <>
-   <FreeDeliveryBanner/>
+      
+   
+
       <Navbar />
       <Banner />
       <RecentlyAdded />
       <AuthorSlider />
       <Footer />
+    
       
     </>
   );

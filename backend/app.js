@@ -8,7 +8,7 @@ import favouriteRoute from './routes/favourite.routes.js'
 import cartRoute from './routes/cart.routes.js'
 import orderRoute from './routes/order.routes.js'
 import paymentRoute from './routes/payment.routes.js'
-import bookRequestRoute from './routes/bookRequests.routes.js'
+// import bookRequestRoute from './routes/bookRequests.routes.js'
 const app = express();
 app.use(cors())
 dotenv.config()
@@ -30,7 +30,7 @@ app.use("/api/v1",bookRoute)
 app.use("/api/v1",favouriteRoute)
 app.use("/api/v1",cartRoute)
 app.use("/api/v1",orderRoute)
-app.use("/api/v1",bookRequestRoute)
+// app.use("/api/v1",bookRequestRoute)
 app.use("/api/v1", paymentRoute);
 
 

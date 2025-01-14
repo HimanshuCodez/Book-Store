@@ -36,9 +36,10 @@ const headers ={
         <ul className="space-y-6">
           {orderHistory.map((order) => (
             <li key={order._id} className="p-4 border rounded-lg shadow-sm">
+              <p className="font-semibold text-gray-700"> {order.url}</p>
               <p className="font-semibold text-gray-700">Order ID: {order._id}</p>
-              <p className="text-sm text-gray-500">Date: {new Date(order.date).toLocaleDateString()}</p>
-              <p className="text-sm text-gray-500">Total: ₹{order.totalPrice}</p>
+              <p className="text-sm text-gray-500">Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-500">Paid: ₹{order.price}</p>
               <p className="text-sm text-gray-500">Status: {order.status}</p>
             </li>
           ))}

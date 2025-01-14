@@ -23,7 +23,7 @@ const FreeDeliveryBanner = () => {
       <Slider {...sliderSettings}>
         {messages.map((message, index) => (
           <div key={index}>
-            <p className=" mb-5 font-semibold">{message}</p>
+            <p className="  font-semibold">{message}</p>
           </div>
         ))}
       </Slider>

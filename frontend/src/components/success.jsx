@@ -27,7 +27,7 @@ const Success = () => {
           toast.success("Order placed successfully!");
 
           setTimeout(() => {
-            navigate("/orders");
+            navigate("/profile/orderHistory");
           }, 4000);
         } catch (error) {
           console.error("Error placing order:", error);
@@ -68,7 +68,7 @@ const Success = () => {
           </p>
           <div className="flex space-x-4">
             <button
-              onClick={() => navigate("/orders")}
+              onClick={() => navigate("/profile/orderHistory")}
               className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-purple-700 hover:shadow-lg transition"
             >
               View Orders

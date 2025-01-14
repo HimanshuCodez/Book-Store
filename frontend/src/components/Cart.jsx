@@ -5,7 +5,8 @@ import { FiTrash2 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import Loader from "./Loader/Loader";
 import {loadStripe} from '@stripe/stripe-js';
-
+import {  FiShoppingCart  } from 'react-icons/fi';
+import Navbar from "./Navbar";
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
@@ -26,7 +27,7 @@ const Cart = () => {
         setCart(response.data.data || []); // Set cart data or an empty array
       } catch (error) {
         console.error("Error fetching cart books:", error);
-        toast.error("Failed to fetch cart items.");
+        toast.error("No items in Cart");
       } finally {
         setLoading(false);
       }
@@ -98,14 +99,17 @@ const Cart = () => {
   };
 
   return (
+    
     <div className="p-8 bg-gray-50 min-h-screen dark:bg-slate-800 dark:text-white">
-      <h1 className="text-3xl font-semibold text-gray-800 mt-8 mb-8 text-center">
+      <Navbar/>
+      <h1 className=" pt-16 text-3xl font-semibold text-gray-800 mt-8 mb-8 text-center">
         Your Cart
       </h1>
       {loading ? (
         <Loader />
       ) : cart.length === 0 ? (
         <div className="text-center">
+           <FiShoppingCart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <p className="text-gray-600 text-lg">No items in your cart.</p>
           <Link to="/" className="text-purple-500 underline">
             Shop Now
