@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cards from "../Cards";
+import { FiTrash2 } from "react-icons/fi";
 
 const Favourites = () => {
   const [favourites, setFavouriteBook] = useState([]);
@@ -43,9 +44,7 @@ const Favourites = () => {
 
       if (response.status === 200) {
         // Update state to remove the book
-        setFavouriteBook((prev) =>
-          prev.filter((book) => book._id !== bookId)
-        );
+        setFavouriteBook((prev) => prev.filter((book) => book._id !== bookId));
       }
     } catch (error) {
       console.error("Error removing book from favourites:", error);
@@ -53,20 +52,25 @@ const Favourites = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-semibold text-gray-800 mt-8 mb-8 text-center">
+    <div className="p-8  min-h-screen">
+      <h1 className="text-3xl font-semibold text-gray-800  mb-8 text-center">
         Your Favourite Books
       </h1>
       {favourites.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3">
+        <div className="grid    lg:pl-44 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3">
           {favourites.map((item) => (
-            <div key={item._id} className="flex flex-col items-center">
-              <Cards data={item} favourite={true} /> {/* No Remove button here */}
+            <div
+              key={item._id}
+              className="flex   flex-col items-center"
+            >
+              <Cards data={item} favourite={true} />{" "}
+              {/* No Remove button here */}
               <button
-                className="bg-red-500 text-white mt-4 px-4 py-2 rounded hover:bg-red-600"
-                onClick={() => handleRemove(item._id)} // Remove button only here
+                onClick={() => handleRemove(item._id)}
+                className="inline-flex -mt-7 items-center text-red-500 hover:text-red-700 transition-colors duration-200"
               >
-                Remove
+                <FiTrash2 className="w-5 h-5 mr-2" />
+                <span>Remove</span>
               </button>
             </div>
           ))}
@@ -79,5 +83,11 @@ const Favourites = () => {
     </div>
   );
 };
-
+<button
+  onClick={() => handleRemove(item._id)}
+  className="inline-flex items-center text-red-500 hover:text-red-700 transition-colors duration-200"
+>
+  <FiTrash2 className="w-5 h-5 mr-2" />
+  <span>Remove</span>
+</button>;
 export default Favourites;

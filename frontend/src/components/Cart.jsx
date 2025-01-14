@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { FiTrash2 } from "react-icons/fi";
+import { FiTrash2, FiShoppingCart } from "react-icons/fi";
 import toast from "react-hot-toast";
 import Loader from "./Loader/Loader";
 import {loadStripe} from '@stripe/stripe-js';
-import {  FiShoppingCart  } from 'react-icons/fi';
 import Navbar from "./Navbar";
+
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
@@ -24,7 +24,7 @@ const Cart = () => {
           "http://localhost:4000/api/v1/get-cart-books",
           { headers }
         );
-        setCart(response.data.data || []); // Set cart data or an empty array
+        setCart(response.data.data || []);
       } catch (error) {
         console.error("Error fetching cart books:", error);
         toast.error("No items in Cart");
@@ -34,7 +34,7 @@ const Cart = () => {
     };
 
     fetchCart();
-  }, []); // Run only once on mount
+  }, []);
 
   const removeFromCart = async (bookId) => {
     try {
@@ -99,78 +99,98 @@ const Cart = () => {
   };
 
   return (
-    
-    <div className="p-8 bg-gray-50 min-h-screen dark:bg-slate-800 dark:text-white">
-      <Navbar/>
-      <h1 className=" pt-16 text-3xl font-semibold text-gray-800 mt-8 mb-8 text-center">
-        Your Cart
-      </h1>
-      {loading ? (
-        <Loader />
-      ) : cart.length === 0 ? (
-        <div className="text-center">
-           <FiShoppingCart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600 text-lg">No items in your cart.</p>
-          <Link to="/" className="text-purple-500 underline">
-            Shop Now
-          </Link>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 dark:text-white">
+      <Navbar />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div className="flex items-center justify-center mb-8">
+          <FiShoppingCart className="w-8 h-8 text-purple-600 mr-3" />
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
+            Your Cart
+          </h1>
         </div>
-      ) : (
-        <div>
-          {/* Cart items */}
-          <div className="space-y-6">
-            {cart.map((item) => (
-              <div
-                key={item._id}
-                className="flex items-center justify-between dark:bg-slate-800 dark:text-white p-4 rounded shadow-md"
-              >
-                {/* Book Info */}
-                <div className="flex items-center space-x-4">
-                  <img
-                    src={item.url}
-                    alt={item.name}
-                    className="w-16 h-16 object-cover rounded-lg"
-                  />
-                  <div>
-                    <h2 className="text-lg font-semibold text-gray-800">
-                      {item.name || "no name available"}
-                    </h2>
-                    <p className="text-gray-500 dark:text-white">
-                      Price: {formatCurrency(item.price)}
-                    </p>
-                  </div>
-                </div>
 
-                {/* Delete Icon */}
-                <button
-                  onClick={() => removeFromCart(item._id)}
-                  className="text-red-500 hover:text-red-700 transition"
-                >
-                  <FiTrash2 size={24} />
-                </button>
-              </div>
-            ))}
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <Loader />
           </div>
-
-          {/* Total Price */}
-          <div className="flex justify-between items-center border-t pt-4 mt-6">
-            <h2 className="text-xl font-bold">Total:</h2>
-            <p className="text-2xl font-bold text-green-600">
-              {formatCurrency(total)}
-            </p>
-          </div>
-
-          {/* Checkout Button */}
-          <div className="flex justify-end mt-6">
-            <button
-              onClick={handleCheckout}
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition text-lg font-semibold"
+        ) : cart.length === 0 ? (
+          <div className="text-center bg-white dark:bg-slate-700 rounded-lg shadow-lg p-8 max-w-md mx-auto">
+            <FiShoppingCart className="w-20 h-20 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600 dark:text-gray-300 text-lg mb-4">Your cart is empty</p>
+            <Link 
+              to="/" 
+              className="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-200"
             >
-              Proceed To Pay
-            </button>
+              Continue Shopping
+            </Link>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            <div className="lg:col-span-2">
+              <div className="space-y-4">
+                {cart.map((item) => (
+                  <div
+                    key={item._id}
+                    className="bg-white dark:bg-slate-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
+                  >
+                    <div className="p-4 sm:p-6 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                      <Link to={`/view-book-details/${item._id}`}><img
+                        src={item.url}
+                        alt={item.name}
+                        className="w-32 h-40 object-cover rounded-lg shadow-sm"
+                      /></Link>
+                      <div className="flex-1 text-center sm:text-left">
+                        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                          {item.name || "No name available"}
+                        </h2>
+                        <p className="text-purple-600 dark:text-purple-400 text-lg font-medium mb-4">
+                          {formatCurrency(item.price)}
+                        </p>
+                        <button
+                          onClick={() => removeFromCart(item._id)}
+                          className="inline-flex items-center text-red-500 hover:text-red-700 transition-colors duration-200"
+                        >
+                          <FiTrash2 className="w-5 h-5 mr-2" />
+                          <span>Remove</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 lg:mt-0">
+              <div className="bg-white dark:bg-slate-700 rounded-lg shadow-lg p-6 sticky top-24">
+                <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+                <div className="space-y-4">
+                  <div className="flex justify-between text-base text-gray-600 dark:text-gray-300">
+                    <span>Subtotal</span>
+                    <span>{formatCurrency(total)}</span>
+                  </div>
+                  <div className="flex justify-between text-base text-gray-600 dark:text-gray-300">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                  </div>
+                  <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
+                    <div className="flex justify-between text-lg font-bold">
+                      <span>Total</span>
+                      <span className="text-purple-600">{formatCurrency(total)}</span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleCheckout}
+                    className="w-full bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition-colors duration-200 text-lg font-semibold flex items-center justify-center"
+                  >
+                    Proceed to Checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

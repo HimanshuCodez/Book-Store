@@ -61,7 +61,7 @@ const RelatedBooks = () => {
     <>
       <div className="bg-white p-4 rounded-lg dark:bg-slate-800 dark:text-white max-w-screen-2xl container mx-auto md:px-20 px-4 py-8">
         <div>
-          <h1 className="font-semibold text-xl pb-2 text-white">Related Books</h1>
+          <h1 className="font-semibold text-xl pb-2 ">Related Books</h1>
         </div>
 
         <div className="rounded-lg bg-slate-50 dark:bg-slate-800 dark:text-white">

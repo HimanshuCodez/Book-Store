@@ -13,8 +13,8 @@ const sliderSettings = {
   autoplaySpeed: 3000,
   slidesToShow: 1,
   slidesToScroll: 1,
-  arrows: false, // No navigation arrows for simplicity
-  dots: false,   // No dots indicator
+  arrows: false, 
+  dots: false,   
 };
 
 const FreeDeliveryBanner = () => {
