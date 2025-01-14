@@ -1,5 +1,21 @@
 [
  
+name
+"The Art of being Alone"
+price
+"3999"
+url
+"https://m.media-amazon.com/images/I/61Ktyy7KymL._AC_UY218_.jpg"
+discountPercent
+"70"
+author
+"himanshu"
+discountedPrice
+"300"
+description
+"The Art of Being Alone explores the beauty and strength found in solit…"
+language
+"English"
     {
       "name": "The Art of being Alone",
       "price": 0,

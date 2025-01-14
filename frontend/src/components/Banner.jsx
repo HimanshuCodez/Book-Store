@@ -1,6 +1,6 @@
 import React from "react";
 import file from "../../public/file.png";
-import FreeDeliveryBanner from "./FreeDelivery";
+import FreeDeliveryBanner from "./Additionals.jsx/FreeDelivery";
 import { Link } from "react-router-dom";
 const Banner = () => {
   return (
