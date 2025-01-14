@@ -1,58 +1,174 @@
 [
   {
-    "name": "The Art of Being Alone",
-    "url" : "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
+    "name": "One Piece",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
     "price": "3999",
     "discountPercent": "70",
     "author": "Himanshu",
-    "discountedPrice": "300", 
-    "description": "The Art of Being Alone explores the beauty and strength found in solitude...",
+    "discountedPrice": "300",
+    "description": "The One Piece explores the beauty and strength found in solitude...",
     "language": "English",
     "category": "manga"
   },
   {
-    "name": "Digital Minimalism",
+    "name": "Demon Slayer",
+    "url": "https://www.midlandbookshop.com/s/607fe93d7eafcac1f2c73ea4/67765bafc8ac79002b5abd93/81rpiropc5l-_sy425_-480x480.jpg",
+    "price": "900",
+    "discountPercent": "70",
+    "author": "Elison",
+    "discountedPrice": "300",
+    "description": "From the mind of New York Times Best-selling author and Eisner Award-winning author Neil Gaiman, Demon Slayer is the living embodiment of justice, possessing oppressed women and giving them the ability to fight their tormentors. In times of trouble, the spirit of Justice appears before women and offers them the chance to take revenge on their male abusers. This graphic novel series will collect all of the classic Lady Justice comics for the first time anywhere.",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Neil Gaimans Lady Justice",
+    "url": "https://www.midlandbookshop.com/s/607fe93d7eafcac1f2c73ea4/676fe97fb832ba00246bfdcf/91-dm4ch5hl-_sy425_-640x640.jpg",
+    "price": "1200",
+    "discountPercent": "70",
+    "author": "C J Henderson",
+    "discountedPrice": "300",
+    "description": "Lady Justice is the living embodiment of justice, possessing oppressed women and giving them the ability to fight their tormentors. In times of trouble, the spirit of Justice appears before women and offers them the chance to take revenge on their male abusers. This graphic novel series will collect all of the classic Lady Justice comics for the first time anywhere.",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "The Ice Guy ",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1713718252i/181881061.jpg",
+    "price": "1300",
+    "discountPercent": "70",
+    "author": "Miyuki Tonogaya",
+    "discountedPrice": "300",
+    "description": " In my crazy world, above all others...you were the only one who was the ugliest. And you were the only one...who was the most beautiful.... This is the unspoken truth.",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Spy X Family",
+    "url": "https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B300%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&set=key%5Bresolve.format%5D,value%5Bwebp%5D&product=path%5B/pimages/9781974722518_p0_v1%5D&call=url%5Bfile:common/decodeProduct.chain%5D",
+    "price": "1600",
+    "discountPercent": "70",
+    "author": " Tatsuya Endo",
+    "discountedPrice": "300",
+    "description": "If you or someone you know is part of the legion of Spy x Family fans, this is the perfect book. A companion guide full of new material and interviews with creator Tatsuya Endo, this belongs on the shelf next to the expanding series.",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Attack Of Titan",
+    "url": "https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B300%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&set=key%5Bresolve.format%5D,value%5Bwebp%5D&product=path%5B/pimages/9781612622538_p0_v2%5D&call=url%5Bfile:common/decodeProduct.chain%5D",
+    "price": "599",
+    "discountPercent": "70",
+    "author": "Hajime",
+    "discountedPrice": "300",
+    "description": "A Japanese manga series written and illustrated by Hajime Isayama, Attack on Titan is set in a world where humanity lives inside cities surrounded by enormous walls that protect them from gigantic man-eating humanoids called Titans.",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Naruto",
+    "url": "https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B300%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&set=key%5Bresolve.format%5D,value%5Bwebp%5D&product=path%5B/pimages/9781569319000_p0_v1%5D&call=url%5Bfile:common/decodeProduct.chain%5D",
+    "price": "3999",
+    "discountPercent": "70",
+    "author": "Masahi",
+    "discountedPrice": "300",
+    "description": "A Japanese manga series written and illustrated by Masashi Kishimoto, Naruto tells the story of a young ninja, Naruto Uzumaki, who seeks recognition from his peers and dreams of becoming the leader of his village.",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Jujutsu Kaisen",
+    "url": "https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B300%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&set=key%5Bresolve.format%5D,value%5Bwebp%5D&product=path%5B/pimages/9781974710027_p0_v1%5D&call=url%5Bfile:common/decodeProduct.chain%5D",
+    "price": "3999",
+    "discountPercent": "70",
+    "author": "Gege Akutami",
+    "discountedPrice": "300",
+    "description": "To gain the power he needs to save his friend from a cursed spirit, Yuji Itadori swallows a piece of a demon, only to find himself caught in the midst of a horrific war of the supernatural!",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Chainsaw Man",
+    "url": "https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B300%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&set=key%5Bresolve.format%5D,value%5Bwebp%5D&product=path%5B/pimages/9781974709946_p0_v1%5D&call=url%5Bfile:common/decodeProduct.chain%5D",
+    "price": "1344",
+    "discountPercent": "70",
+    "author": " Tatsuki Fujimoto",
+    "discountedPrice": "300",
+    "description": "The One Piece explores the beauty and strength found in solitude...",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Chainsaw Man, Vol. 3",
+    "url": "https://prodimage.images-bn.com/pimages/9781974709953_p0_v1_s600x595.jpg",
+    "price": "800",
+    "discountPercent": "70",
+    "author": "Tatsuki Fujimoto",
+    "discountedPrice": "300",
+    "description": "A mysterious devil is demanding Denji’s heart! But will the devil hunters from Division 4 agree to this deal to save themselves? Or will Denji have to do what Denji does best—turn into a chainsaw and carve up everything that gets in his way?!",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "One Piece",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
+    "price": "3999",
+    "discountPercent": "70",
+    "author": "Himanshu",
+    "discountedPrice": "300",
+    "description": "The One Piece explores the beauty and strength found in solitude...",
+    "language": "English",
+    "category": "manga"
+  },
+  {
+    "name": "Buy Addicted to You",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/Addicted-to-You-300x450.jpg",
     "price": "2999",
     "discountPercent": "45",
-    "author": "Sarah Chen",
+    "author": "Krista Ritchie",
     "discountedPrice": "1649",
     "description": "A comprehensive guide to living meaningfully in the digital age...",
     "language": "English",
-    "category": "Technology"
+    "category": "adult"
   },
   {
-    "name": "The Silent Garden",
+    "name": "101 Kinky Things Even You Can Do",
     "price": "4500",
+    "url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/217/9781913947217.jpg",
     "discountPercent": "55",
-    "author": "Marcus Peterson",
+    "author": " Kate Sloan",
     "discountedPrice": "2025",
     "description": "Journey through the metaphysical aspects of gardening and self-discovery...",
     "language": "English",
-    "category": "Nature"
+    "category": "adult"
   },
   {
-    "name": "Quantum Physics Basics",
-    "price": "5999",
+    "name": "The Second Sex (Vintage Feminism Short Edition)",
+    "price": "1999",
+    "url": "https://www.bookswagon.com/productimages/images200/386/9781784870386.jpg",
     "discountPercent": "25",
-    "author": "Dr. Emily Watson",
-    "discountedPrice": "4499",
-    "description": "An accessible exploration of quantum mechanics for curious minds...",
+    "author": "Simone de Beauvoir",
+    "discountedPrice": "780",
+    "description": "When first published in 1949, this title led to outrage and scandal. This work contains the key passages of the book that changed perceptions of women forever.",
     "language": "English",
-    "category": "Science"
+    "category": "adult"
   },
   {
-    "name": "The Chef's Secret",
+    "name": "Don't Panic, It's Puberty!: A Guide for Girls",
     "price": "3599",
+    "url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/mainimages/474/9781445186474.jpg",
     "discountPercent": "40",
-    "author": "Pierre Dubois",
+    "author": "Franklin Watts",
     "discountedPrice": "2159",
-    "description": "Master the art of French cuisine with traditional techniques...",
+    "description": "A funny, body-positive look at puberty for girls",
     "language": "English",
-    "category": "Cooking"
+    "category": "adult"
   },
   {
     "name": "Financial Freedom",
     "price": "4999",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
+
     "discountPercent": "35",
     "author": "Robert Miles",
     "discountedPrice": "3249",
@@ -63,6 +179,8 @@
   {
     "name": "The Last Symphony",
     "price": "2999",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
+
     "discountPercent": "30",
     "author": "Isabella Romano",
     "discountedPrice": "2099",
@@ -73,6 +191,8 @@
   {
     "name": "Mind Over Matter",
     "price": "3499",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
+
     "discountPercent": "50",
     "author": "Dr. James Sullivan",
     "discountedPrice": "1749",
@@ -83,6 +203,8 @@
   {
     "name": "Web Development 2025",
     "price": "5999",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
+
     "discountPercent": "20",
     "author": "Tech Masters Group",
     "discountedPrice": "4799",
@@ -93,6 +215,8 @@
   {
     "name": "Yoga for Beginners",
     "price": "2499",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
+
     "discountPercent": "45",
     "author": "Priya Sharma",
     "discountedPrice": "1374",
@@ -101,98 +225,111 @@
     "category": "Health"
   },
   {
-    "name": "The Art of Photography",
-    "price": "4999",
+    "name": "The Name Drop",
+    "price": "4544",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1675459814i/66098768.jpg",
     "discountPercent": "30",
-    "author": "Michael Chang",
-    "discountedPrice": "3499",
-    "description": "Master the fundamentals of composition and lighting...",
+    "author": "Susan Lee",
+    "discountedPrice": "3495",
+    "description": "When Elijah Ri arrives in New York City for an internship at his father’s massive tech company, Haneul Corporation, he expects the royal treatment that comes with being the future CEO—even if that’s the last thing he wants. But instead, he finds himself shuffled into a group of overworked, unpaid interns, all sharing a shoebox apartment for the summer.    When Jessica Lee arrives in New York City, she’s eager to make the most of her internship at Haneul Corporation, even if she’s at the bottom of the corporate ladder. But she’s shocked to be introduced as the new executive-in-training intern with a gorgeous brownstone all to herself.",
     "language": "English",
-    "category": "Art"
+    "category": "kdrama"
   },
   {
-    "name": "Historical Mysteries",
+    "name": "ASAP",
     "price": "3299",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1687625549i/112975158.jpg",
     "discountPercent": "25",
-    "author": "Elizabeth Hart",
+    "author": "Axie Oh",
     "discountedPrice": "2474",
-    "description": "Uncover the greatest unsolved mysteries of history...",
+    "description": "Sori has worked her whole life to become a K-pop idol, until she realizes she doesn’t want a life forever in the spotlight. But that’s not actually up to Sori—she’s caught between her exacting mother’s entertainment company and her father’s presidential aspirations. And as the pressure to keep her flawless public image grows, the last person she should be thinking about is her ex-boyfriend.So when Nathaniel finds himself rocked by scandal, Sori offers him a hideaway with her. And back in close quarters, it’s hard to deny their old feelings. But when Sori gets an opportunity to break free from her parent’s expectations, she will have to decide: Is her future worth sacrificing for a second chance at love?",
     "language": "English",
-    "category": "History"
+    "category": "kdrama"
   },
   {
-    "name": "Green Living",
-    "price": "2999",
+    "name": "Wicked Fox",
+    "price": "2045",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1561485441i/42133479.jpg",
     "discountPercent": "40",
-    "author": "Emma Green",
-    "discountedPrice": "1799",
-    "description": "Practical tips for sustainable living and reducing carbon footprint...",
+    "author": "Kat Cho",
+    "discountedPrice": "1454",
+    "description": "With murderous forces lurking in the background, Miyoung and Jihoon develop a tenuous friendship that blossoms into something more. But when a young shaman tries to reunite Miyoung with her bead, the consequences are disastrous . . . forcing Miyoung to choose between her immortal life and Jihoon's.",
     "language": "English",
-    "category": "Environment"
+    "category": "kdrama"
   },
   {
-    "name": "The Business Mindset",
-    "price": "4599",
-    "discountPercent": "35",
+    "name": "Stay with My Heart",
+    "price": "4534",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686927524i/150444501._SX300_.jpg",
+    "discountPercent": "50",
     "author": "John Davidson",
-    "discountedPrice": "2989",
-    "description": "Develop the mindset of successful entrepreneurs...",
+    "discountedPrice": "2400",
+    "description": "From the author of Counting Down with You  and  A Show for Two comes a new YA contemporary about a girl who accidentally sabotages an up-and-coming local band and falls for the guitarist while secretly trying to make up for her mistake.",
     "language": "English",
-    "category": "Business"
+    "category": "kdrama"
   },
   {
-    "name": "Poetry in Motion",
+    "name": "XOXO",
     "price": "1999",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1602086642i/54618808.jpg",
     "discountPercent": "20",
-    "author": "Laura Smith",
+    "author": "Axie Oh",
     "discountedPrice": "1599",
     "description": "A collection of contemporary poems about life and love...",
     "language": "English",
     "category": "Poetry"
   },
   {
-    "name": "Travel Adventures",
+    "name": "Seoulmates",
     "price": "3499",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1644613272i/58939924.jpg",
+
     "discountPercent": "45",
     "author": "Mark Thompson",
-    "discountedPrice": "1924",
-    "description": "Stories from around the world that will inspire your wanderlust...",
+    "discountedPrice": "1904",
+    "description": "But someone who does know K-dramas—so well that he’s actually starring in one—is Jacob Kim Hannah’s, former best friend whom she hasn’t seen in years. He’s desperate for a break from the fame so a family trip back to San Diego might be just what he needs… that is if he and Hannah can figure out what went wrong when they last parted and navigate the new feelings developing between them.",
     "language": "English",
-    "category": "Travel"
+    "category": "kdrama"
   },
   {
-    "name": "Coding for Kids",
+    "name": "Heart and Seoul",
     "price": "2499",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1583861175i/44539656._SX300_.jpg",
+
     "discountPercent": "30",
-    "author": "Tech Academy",
-    "discountedPrice": "1749",
+    "author": "Jen Frederick",
+    "discountedPrice": "1219",
     "description": "Make programming fun and easy for young minds...",
     "language": "English",
-    "category": "Education"
+    "category": "kdrama"
   },
   {
-    "name": "Mystery at Midnight",
+    "name": "K-pop Confidential",
     "price": "2999",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1576656079i/49090423.jpg",
+
     "discountPercent": "25",
     "author": "Sarah Black",
-    "discountedPrice": "2249",
+    "discountedPrice": "2434",
     "description": "A thrilling detective story that will keep you guessing...",
     "language": "English",
-    "category": "Mystery"
+    "category": "kdrama"
   },
   {
-    "name": "Healthy Recipes",
+    "name": "The Noh Family",
     "price": "3299",
-    "discountPercent": "40",
+    "url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1632398452i/58784518.jpg",
+    "discountPercent": "45",
     "author": "Nutritionist Group",
-    "discountedPrice": "1979",
-    "description": "Nutritious and delicious recipes for a balanced lifestyle...",
+    "discountedPrice": "1279",
+    "description": "When her friends gift her a 23-and-Me test as a gag, high school senior Chloe Kang doesn't think much of trying it out. She doesn't believe anything will come of it--she's an only child, her mother is an orphan, and her father died in Seoul before she was even born, and before her mother moved to Oklahoma. It's been just Chloe and her mom her whole life. But the DNA test reveals something Chloe never expected--she's got a whole extended family from her father's side half a world away in Korea. Her father's family are owners of a famous high-end department store, and are among the richest families in Seoul. When they learn she exists, they are excited to meet her. Her mother has huge reservations, she hasn't had a great relationship with her husband's family, which is why she's kept them secret, but she can't stop Chloe from travelling to Seoul to spend two weeks getting to know the Noh family.",
     "language": "English",
-    "category": "Cooking"
+    "category": "kdrama"
   },
   {
     "name": "Space Exploration",
     "price": "4999",
+    "url": "https://delhibookmarket.com/wp-content/uploads/2023/09/One-Piece-Manga-Vol-1One-Piece-Manga-Vol-1-300x450.jpg",
     "discountPercent": "30",
     "author": "Dr. Neil Rogers",
     "discountedPrice": "3499",

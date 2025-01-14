@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Star } from "lucide-react";
 
 const Cards = ({ data, favourite, setProfile }) => {
   const headers = {
@@ -16,44 +17,75 @@ const Cards = ({ data, favourite, setProfile }) => {
         {},
         { headers }
       );
-      setProfile(response.data); // Update the profile state after removing the book
+      setProfile(response.data);
     } catch (error) {
       console.error("Error removing book from favourites:", error);
     }
   };
 
+  const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
+
   return (
-    <div className="mt-4 my-8 p-3">
-      {/* Book Details (Link to view details) */}
+    <div className="p-2">
       <Link to={`/view-book-details/${data._id}`}>
-        <div className="card w-92 bg-base-100 shadow-xl hover:scale-105 duration-200 dark:bg-slate-900 dark:text-white dark:border">
-          <figure className="3 w-full h-48">
+        <div className="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 dark:bg-slate-800">
+          {/* Image Container - Modified for better image display */}
+          <div className="relative h-48 overflow-hidden rounded-t-lg bg-gray-100">
             <img
               src={data.url}
               alt={data.name}
-              className="h-full object-fill"
+              className="w-full h-full object-contain transform hover:scale-102 transition-transform duration-500"
+              loading="lazy"
             />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">
+            {/* Discount Tag */}
+            <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 rounded-bl-lg text-sm font-semibold">
+              {data.discountPercent}% OFF
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="p-3">
+            {/* Title */}
+            <h2 className="text-base font-bold text-gray-800 dark:text-white mb-1 line-clamp-1">
               {data.name}
-              <p className="text-green-600 font-semibold">
-                {data.discountPercent}% off
-              </p>
             </h2>
-            <p>{data.title}</p>
-            <div className="card-actions justify-between">
-              <p className="font-extrabold">₹{data.discountedPrice}</p>
-              <p className="line-through opacity-50">₹{data.price}</p>
-              <div className="cursor-pointer px-2 py-1 rounded-lg border-2 border-gray-300 hover:bg-purple-600 hover:text-white transition duration-200">
-                Buy Now
+
+            {/* Star Rating */}
+            <div className="flex items-center gap-1 mb-1">
+              {[...Array(5)].map((_, index) => (
+                <Star
+                  key={index}
+                  size={14}
+                  className={index < Math.floor(rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}
+                />
+              ))}
+              <span className="text-sm text-gray-600 ml-1">{rating}</span>
+            </div>
+
+            {/* Description */}
+            <p className="text-xs text-gray-600 dark:text-gray-300 mb-2 line-clamp-1">
+              {data.description || "A fascinating book that takes readers on an incredible journey..."}
+            </p>
+
+            {/* Price Section */}
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-baseline gap-2">
+                <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
+                  ₹{data.discountedPrice}
+                </span>
+                <span className="text-xs text-gray-500 line-through">
+                  ₹{data.price}
+                </span>
               </div>
             </div>
+
+            {/* Buy Button */}
+            <button className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-1.5 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-300 text-sm font-semibold shadow-sm hover:shadow-md transform hover:-translate-y-0.5">
+              Buy Now
+            </button>
           </div>
         </div>
       </Link>
-
-    
     </div>
   );
 };

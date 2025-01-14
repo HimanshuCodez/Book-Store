@@ -8,6 +8,7 @@ import SaleSlider from "../components/Additionals.jsx/SaleSlider";
 import GifReviewSlider from "../components/Additionals.jsx/gifs";
 import Manga from "../components/BookCategory.jsx/Manga";
 import Adult from "../components/BookCategory.jsx/Adult";
+import Kdrama from "../components/BookCategory.jsx/Kdrama";
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
       <Navbar />
       <Banner />
       <RecentlyAdded />
+      <Kdrama/>
       <SaleSlider/>
       <Manga/>
       <Adult/>

@@ -70,33 +70,67 @@ const Cart = () => {
       if (!stripe) {
         throw new Error('Stripe failed to load');
       }
-
+  
+      // Format cart items with required fields for Stripe
+      const formattedCartItems = cart.map(item => ({
+        name: item.name || 'Untitled Book', // Fallback name if missing
+        price: item.price,
+        url: item.url,
+        description: item.description || `Book ID: ${item._id}`, // Fallback description
+        quantity: 1,
+        _id: item._id
+      }));
+  
+      // Log the cart items before sending to verify data
+      console.log('Sending cart items:', formattedCartItems);
+  
       const response = await axios.post(
         "http://localhost:4000/api/v1/checkout",
-        { cartItems: cart },
+        { cartItems: formattedCartItems },
         { headers }
       );
-
+  
       const { id: sessionId } = response.data;
-
+  
       if (!sessionId) {
         throw new Error('No session ID received');
       }
-
+  
       toast.loading("Redirecting to checkout...");
       
       const result = await stripe.redirectToCheckout({
         sessionId: sessionId
       });
-
+  
       if (result.error) {
         toast.error(result.error.message);
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      toast.error('Checkout failed. Please try again.');
+      // More detailed error message
+      if (error.response?.data?.error) {
+        toast.error(`Checkout failed: ${error.response.data.error}`);
+      } else {
+        toast.error('Checkout failed. Please try again.');
+      }
     }
   };
+  
+  // Also add this debug useEffect to check cart data when it's loaded
+  useEffect(() => {
+    if (cart.length > 0) {
+      console.log('Cart data loaded:', cart);
+      // Verify each item has required fields
+      cart.forEach((item, index) => {
+        if (!item.name) {
+          console.warn(`Warning: Item at index ${index} is missing name:`, item);
+        }
+        if (typeof item.price === 'undefined') {
+          console.warn(`Warning: Item at index ${index} is missing price:`, item);
+        }
+      });
+    }
+  }, [cart]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 dark:text-white">
@@ -142,7 +176,7 @@ const Cart = () => {
                       /></Link>
                       <div className="flex-1 text-center sm:text-left">
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-                          {item.name || "No name available"}
+                          {item.name || "No name "}
                         </h2>
                         <p className="text-purple-600 dark:text-purple-400 text-lg font-medium mb-4">
                           {formatCurrency(item.price)}

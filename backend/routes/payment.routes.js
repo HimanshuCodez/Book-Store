@@ -33,6 +33,7 @@ router.post('/checkout', authenticateToken, async(req,res) => {
             name: item.name,
             images: [item.url],
             description: item.description,
+            category:item.category,
           },
           unit_amount: item.price * 100,
         },

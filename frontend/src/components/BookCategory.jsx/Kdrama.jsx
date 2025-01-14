@@ -6,7 +6,7 @@ import axios from "axios";
 import Cards from "../Cards";
 import Loader from "../Loader/Loader";
 
-const RecentlyAdded = () => {
+const Kdrama = () => {
   const [Data, setData] = useState();
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const RecentlyAdded = () => {
     <>
       <div className=" mt-8 max-w-screen-2xl container mx-auto md:px-20 px-4">
         <div>
-          <h1 className="font-semibold text-xl pb-2">Manga</h1>
+          <h1 className="font-semibold text-xl pb-2">K-Drama Books</h1>
         </div>
 
         <div>
@@ -75,7 +75,7 @@ const RecentlyAdded = () => {
           )}
           <Slider {...settings}>
             {Data &&
-              Data.filter((item) => item.category === "manga").map((item, i) => (
+              Data.filter((item) => item.category === "kdrama").map((item, i) => (
                 <div key={i}>
                   <Cards data={item} key={item.id} />
                 </div>
@@ -86,6 +86,5 @@ const RecentlyAdded = () => {
     </>
   );
 };
-// https://dispatch.barnesandnoble.com/content/dam/ccr/boutique/manga/anime/v2/img_0.png
 
-export default RecentlyAdded;
+export default Kdrama;

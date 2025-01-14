@@ -25,7 +25,7 @@ const GifReviewSlider = () => {
     },
     {
       id: 4,
-      src: "https://media1.tenor.com/m/amkvR7wAEpMAAAAd/nice-good.gif",
+      src: "https://media1.tenor.com/m/k2xfpFYUChEAAAAC/meme-anime.gif",
       alt: "Loved the Experience - Customer Review 4",
       caption: "Loved the shopping experience!",
     },

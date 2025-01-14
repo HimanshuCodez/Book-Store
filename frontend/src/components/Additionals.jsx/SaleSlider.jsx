@@ -26,8 +26,13 @@ const SaleSlider = () => {
       src: "https://www.bookswagon.com/bannerimages/70_inr.jpg?v=3.5",
       alt: "Buy 2 Get 1 Free!",
     },
+    {
+      id: 5,
+      src: "https://dispatch.barnesandnoble.com/content/dam/ccr/homepage/daily/2025/01/10/31615_BB_1_OnyxStorm_01_10_25.jpg",
+      alt: "Buy 2 Get 1 Free!",
+    },
   ];
-
+  
   const settings = {
     dots: true, // Show pagination dots
     infinite: true, // Enable infinite loop

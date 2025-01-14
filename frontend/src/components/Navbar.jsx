@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { authActions } from "../store/auth";
+
 import { FaUserCircle } from "react-icons/fa"; // Icon for user profile in case avatar is unavailable
 import { TbLogout } from "react-icons/tb";
 
-const Navbar = (cart = []) => {
+const Navbar = () => {
   const dispatch = useDispatch();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [dropdownOpen, setDropdownOpen] = useState(false);

@@ -19,6 +19,7 @@
     "@stripe/stripe-js": "^5.2.0",
     "axios": "^1.7.4",
     "framer-motion": "^11.17.0",
+    "lucide-react": "^0.471.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.2",
