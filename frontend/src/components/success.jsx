@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import gifss  from '../../public/gifss.gif'
 
 const Success = () => {
   const location = useLocation();
@@ -19,7 +20,7 @@ const Success = () => {
           };
 
           await axios.post(
-            "http://localhost:4000/api/v1/place-order",
+            "https://backend-h759.onrender.com/api/v1/place-order",
             { session_id: sessionId },
             { headers }
           );
@@ -44,20 +45,7 @@ const Success = () => {
       <div className="bg-white p-10 rounded-2xl shadow-xl max-w-lg w-full text-center">
         <div className="flex flex-col items-center">
           <div className="rounded-full bg-green-100 p-6 mb-6">
-            <svg
-              xmlns="https://media.tenor.com/40bYuytgRvYAAAAi/hedge-pay-hpay.gif"
-              className="h-16 w-16 text-green-500 animate-bounce"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m0 0a9 9 0 11-8 4.5m8-4.5V7m0 4.5a9 9 0 11-8 4.5"
-              />
-            </svg>
+            <img src={gifss} alt="" />
           </div>
           <h2 className="text-3xl font-bold text-green-600 mb-4">
             Payment Successful!

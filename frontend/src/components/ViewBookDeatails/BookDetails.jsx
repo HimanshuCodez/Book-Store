@@ -22,7 +22,7 @@ const BookDetails = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:4000/api/v1/get-book-by-id/${id}`
+          `https://backend-h759.onrender.com/api/v1/get-book-by-id/${id}`
         );
         setBookData(response.data.data);
 
@@ -52,22 +52,22 @@ const BookDetails = () => {
               avatar: "https://imgs.search.brave.com/PidiBCmLbzqycBzNj14BNU7fYxlZKJqaMj6t7ZoXazM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDEwMTA0/MjQ0LnBuZw",
             },
           },
-          // {
-          //   text: "Didn't enjoy it as much as I thought I would. The pacing was slow.",
-          //   rating: 2,
-          //   user: {
-          //     name: "Rose",
-          //     avatar: "https://imgs.search.brave.com/kNg2r-YCzaHM034-vPA55ACQdQAOdT-CuTUpjJO2Cok/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGZwcy5nZy9wZnBz/LzU0NTktYmxhY2tw/aW5rLXJvc2UucG5n",
-          //   },
-          // },
-          // {
-          //   text: "Not my cup of tea. Felt too cliche.",
-          //   rating: 1,
-          //   user: {
-          //     name: "Lisa",
-          //     avatar: "https://imgs.search.brave.com/jH9UYNdOBJHnSUWIknuK-rBzTh0-U2n9GHyX2gbFUsI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2FlL2Vk/LzdhL2FlZWQ3YWE3/ZDEyMzUxN2UyOTNh/NWFjZWFmOTBhZDFm/LmpwZw",
-          //   },
-          // },
+          {
+            text: "Didn't enjoy it as much as I thought I would. The pacing was slow.",
+            rating: 2,
+            user: {
+              name: "Rose",
+              avatar: "https://imgs.search.brave.com/kNg2r-YCzaHM034-vPA55ACQdQAOdT-CuTUpjJO2Cok/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGZwcy5nZy9wZnBz/LzU0NTktYmxhY2tw/aW5rLXJvc2UucG5n",
+            },
+          },
+          {
+            text: "Not my cup of tea. Felt too cliche.",
+            rating: 1,
+            user: {
+              name: "Lisa",
+              avatar: "https://imgs.search.brave.com/jH9UYNdOBJHnSUWIknuK-rBzTh0-U2n9GHyX2gbFUsI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2FlL2Vk/LzdhL2FlZWQ3YWE3/ZDEyMzUxN2UyOTNh/NWFjZWFmOTBhZDFm/LmpwZw",
+            },
+          },
         ];
 
         setReviews(fakeReviews); // Set the fake reviews with avatars
@@ -89,7 +89,7 @@ const BookDetails = () => {
   const handleFavourite = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:4000/api/v1/add-to-favourite",
+        "https://backend-h759.onrender.com/api/v1/add-to-favourite",
         {},
         { headers }
       );
@@ -103,7 +103,7 @@ const BookDetails = () => {
   const handleCart = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:4000/api/v1/add-to-cart",
+        "https://backend-h759.onrender.com/api/v1/add-to-cart",
         {},
         { headers }
       );
@@ -121,7 +121,7 @@ const BookDetails = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/add-review",
+        "https://backend-h759.onrender.com/api/v1/add-review",
         { bookId: id, ...newReview },
         { headers }
       );

@@ -21,7 +21,7 @@ const Cart = () => {
     const fetchCart = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/get-cart-books",
+          "https://backend-h759.onrender.com/api/v1/get-cart-books",
           { headers }
         );
         setCart(response.data.data || []);
@@ -39,7 +39,7 @@ const Cart = () => {
   const removeFromCart = async (bookId) => {
     try {
       await axios.put(
-        `http://localhost:4000/api/v1/remove-from-cart/${bookId}`,
+        `https://backend-h759.onrender.com/api/v1/remove-from-cart/${bookId}`,
         {},
         { headers }
       );
@@ -71,21 +71,21 @@ const Cart = () => {
         throw new Error('Stripe failed to load');
       }
   
-      // Format cart items with required fields for Stripe
+      
       const formattedCartItems = cart.map(item => ({
-        name: item.name || 'Untitled Book', // Fallback name if missing
+        name: item.name || 'Untitled Book',
         price: item.price,
         url: item.url,
-        description: item.description || `Book ID: ${item._id}`, // Fallback description
+        description: item.description || `Book ID: ${item._id}`, 
         quantity: 1,
         _id: item._id
       }));
   
-      // Log the cart items before sending to verify data
+      
       console.log('Sending cart items:', formattedCartItems);
   
       const response = await axios.post(
-        "http://localhost:4000/api/v1/checkout",
+        "https://backend-h759.onrender.com/api/v1/checkout",
         { cartItems: formattedCartItems },
         { headers }
       );
@@ -117,20 +117,7 @@ const Cart = () => {
   };
   
   // Also add this debug useEffect to check cart data when it's loaded
-  useEffect(() => {
-    if (cart.length > 0) {
-      console.log('Cart data loaded:', cart);
-      // Verify each item has required fields
-      cart.forEach((item, index) => {
-        if (!item.name){
-          console.warn(`Warning: Item at index ${index} is missing name:`, item);
-        }
-        if (typeof item.price === 'undefined') {
-          console.warn(`Warning: Item at index ${index} is missing price:`, item);
-        }
-      });
-    }
-  }, [cart]);
+ 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-900 dark:text-white">

@@ -34,7 +34,7 @@ function Signup() {
 
     try {
       // Send the signup data to the backend
-      const response = await axios.post("http://localhost:4000/api/v1/sign-up", values);
+      const response = await axios.post("https://backend-h759.onrender.com/api/v1/sign-up", values);
 
       if (response.data) {
         toast.success("Signup Successful");

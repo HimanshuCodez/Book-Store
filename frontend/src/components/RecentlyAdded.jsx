@@ -13,7 +13,7 @@ const  RecentlyAdded = ()=> {
     // Fetch data from API
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:4000/api/v1/get-recent-books"
+        "https://backend-h759.onrender.com/api/v1/get-recent-books"
       );
      setData(response.data.data);
     };

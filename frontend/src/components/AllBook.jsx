@@ -12,7 +12,7 @@ const AllBook = () => {
     // Fetch data from API
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:4000/api/v1/get-all-books"
+        "https://backend-h759.onrender.com/api/v1/get-all-books"
       );
      setData(response.data.data);
     };
@@ -27,7 +27,7 @@ const AllBook = () => {
             <span className="text-purple-500"> Here! :)</span>
           </h1>
          
-       <Link to="/cart" >
+       <Link to="/" >
             <button className="mt-6 bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-pink-500 duration-300">
               Back
             </button>

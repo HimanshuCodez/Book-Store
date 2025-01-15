@@ -10,7 +10,7 @@ const AdminBookRequests = () => {
     // Fetch all book requests
     const fetchRequests = async () => {
       try {
-        const { data } = await axios.get("http://localhost:4000/api/v1/admin-book-requests");
+        const { data } = await axios.get("https://backend-h759.onrender.com/api/v1/admin-book-requests");
         setRequests(data);
       } catch (err) {
         setError("Error fetching book requests");

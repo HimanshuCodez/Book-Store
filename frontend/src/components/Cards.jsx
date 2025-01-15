@@ -13,7 +13,7 @@ const Cards = ({ data, favourite, setProfile }) => {
   const handleBookRemove = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:4000/api/v1/remove-from-favourite",
+        "https://backend-h759.onrender.com/api/v1/remove-from-favourite",
         {},
         { headers }
       );
