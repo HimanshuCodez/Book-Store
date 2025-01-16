@@ -1,5 +1,5 @@
 
-# Bookishhh
+ # Bookishhh 🚀
 
 Bookishhh is a Modern BookStore which is built on MERN stack technologies.
 
