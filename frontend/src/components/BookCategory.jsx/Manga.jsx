@@ -25,7 +25,7 @@ const RecentlyAdded = () => {
   }, []);
 
   var settings = {
-    dots: true,
+    
     infinite: true,
     speed: 500,
     slidesToShow: 5,
@@ -53,7 +53,7 @@ const RecentlyAdded = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },

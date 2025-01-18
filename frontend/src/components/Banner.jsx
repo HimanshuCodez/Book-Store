@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <>
-      <div className="min-h-screen flex flex-col">
+      <div className=" flex flex-col ">
         <FreeDeliveryBanner />
         <div className=" pt-12 max-w-screen-2xl container mx-auto md:px-20 px-4 flex flex-col md:flex-row my-10">
           <div className="w-full order-2  md:order-1  md:w-1/2 mt:12 md:mt-36">
@@ -16,9 +16,15 @@ const Banner = () => {
                 <span className="text-purple-600"> new everyday!! </span>
               </h1>
               <p className="text-xl md:text-xl ">
-                Here you will find Organized into chapters, sections, or
-                sessions, study books provide a clear outline of topics to be
-                covered.
+              Here you'll discover a curated selection of books catering to all your interests! Dive into the captivating world of manga, indulge in the magic of K-drama-inspired novels, and explore a variety of genres that ignite your imagination. Whether you're a fan of graphic storytelling or looking for gripping dramas, our store offers something for everyone. Let your reading journey begin here!
+
+
+
+
+
+
+
+
               </p>
               <label className="input input-bordered flex items-center gap-2">
                 <svg

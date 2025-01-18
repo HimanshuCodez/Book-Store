@@ -25,7 +25,7 @@ const  RecentlyAdded = ()=> {
     dots: true, // Show navigation dots
     infinite: true, // Infinite loop sliding
     speed: 500, // Slide transition speed (ms)
-    slidesToShow: 4, // Number of cards to show at once
+    slidesToShow: 5, // Number of cards to show at once
     slidesToScroll: 1, // Number of cards to scroll at once
     autoplay: true, // Enable automatic sliding
     autoplaySpeed: 1500,
@@ -50,7 +50,7 @@ const  RecentlyAdded = ()=> {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
