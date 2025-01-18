@@ -32,8 +32,8 @@ const Navbar = () => {
       setError(null);
       
       try {
-        // Updated endpoint to match backend route structure
-        const response = await fetch(`/api/v1/books/search?q=${encodeURIComponent(searchQuery.trim())}`);
+       
+        const response = await fetch(`/api/v1/search?q=${encodeURIComponent(searchQuery.trim())}`);
         
         if (!response.ok) {
           const contentType = response.headers.get('content-type');
