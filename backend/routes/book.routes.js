@@ -125,5 +125,45 @@ router.get("/get-book-by-id/:id",async(req,res)=>{
     }
 })
 
+// Search endpoint
+router.get('/search', async (req, res) => {
+    try {
+      const { q, filter } = req.query;
+      
+      if (!q) {
+        return res.status(400).json({ message: 'Search query is required' });
+      }
+      
+      const searchRegex = new RegExp(q.trim(), 'i');
+      
+      let searchQuery = {};
+      
+      if (filter && filter !== 'all') {
+        searchQuery[filter] = searchRegex;
+      } else {
+        searchQuery = {
+          $or: [
+            { name: searchRegex },
+            { author: searchRegex },
+            { language: searchRegex },
+            { description: searchRegex },
+            { isbn: searchRegex }
+          ]
+        };
+      }
+      
+      const books = await Book.find(searchQuery)
+        .sort({ createdAt: -1 })
+        .limit(20)
+        .lean();
+      
+      return res.json(books);
+      
+    } catch (error) {
+      console.error('Search error:', error);
+      return res.status(500).json({ message: 'Server error during search' });
+    }
+  });
+
 
 export default router;

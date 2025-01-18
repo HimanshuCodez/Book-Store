@@ -7,6 +7,9 @@ import { authActions } from "../store/auth";
 import { FaUserCircle } from "react-icons/fa"; // Icon for user profile in case avatar is unavailable
 import { TbLogout } from "react-icons/tb";
 
+import BookSearch from "./Search";
+
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -44,14 +47,22 @@ const Navbar = () => {
         sticky ? "sticky-navbar shadow-md bg-slate-100 duration-300" : ""
       }`}
     >
+      
       <div className="navbar  mt-2">
+      
         <div className="navbar-start">
           <Link to="/" className="text-2xl   font-bold cursor-pointer">
             Bookish
           </Link>
         </div>
+       {/* Search Bar Component */}
+    <div className="navbar-center hidden lg:flex">
+      <BookSearch/>
+    </div>
+    
         {/* Desktop Navigation */}
         <div className="navbar-end space-x-3">
+       
           <ul className="menu menu-horizontal hidden lg:flex px-1">
             <li>
               <Link to="/">Home</Link>
@@ -180,6 +191,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+    
     </div>
   );
 };

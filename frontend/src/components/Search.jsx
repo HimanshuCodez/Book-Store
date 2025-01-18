@@ -1,242 +1,179 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import { Search, Loader2, BookOpen, X } from 'lucide-react'; // Adding X icon for close
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
-// API instance
-const api = axios.create({
-  baseURL: '/api/v1',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// SearchInput Component
-const SearchInput = ({ searchTerm, setSearchTerm, loading }) => (
-  <div className="relative flex-1">
-    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-      <Search className="h-5 w-5 text-gray-400" />
-    </div>
-    <input
-      type="text"
-      placeholder="Search books by name, author, language, or ISBN..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white shadow-sm placeholder-gray-400"
-      aria-label="Search books"
-    />
-    {loading && (
-      <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-        <Loader2 className="h-5 w-5 text-gray-400 animate-spin" />
-      </div>
-    )}
-  </div>
-);
-
-// Dropdown Component for Filters
-const Dropdown = ({ selectedFilter, setSelectedFilter, open, toggleDropdown }) => (
-  <div className="relative">
-    <div className="flex justify-between items-center">
-      <button
-        onClick={toggleDropdown}
-        className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-gray-600"
-      >
-        {selectedFilter === 'all' ? 'All Fields' : selectedFilter}
-      </button>
-      {open ? (
-        <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-2">
-          <select
-            value={selectedFilter}
-            onChange={(e) => setSelectedFilter(e.target.value)}
-            className="w-full px-4 py-3 bg-white border-none rounded-lg focus:outline-none text-gray-600"
-          >
-            <option value="all">All Fields</option>
-            <option value="name">Title</option>
-            <option value="author">Author</option>
-            <option value="language">Language</option>
-            <option value="isbn">ISBN</option>
-          </select>
-        </div>
-      ) : null}
-    </div>
-  </div>
-);
-
-// BookGrid Component
-const BookGrid = ({ books }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {books.map((book) => (
-      <div key={book._id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-        {book.url ? (
-          <div className="h-48 overflow-hidden rounded-t-lg">
-            <img 
-              src={book.url} 
-              alt={book.name}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/400x300?text=No+Image';
-              }}
-            />
-          </div>
-        ) : (
-          <div className="h-48 bg-gray-100 rounded-t-lg flex items-center justify-center">
-            <BookOpen className="h-12 w-12 text-gray-400" />
-          </div>
-        )}
-        <div className="p-6">
-          <h3 className="font-bold text-xl mb-2 text-gray-900">{book.name}</h3>
-          <p className="text-gray-600 mb-2">By {book.author}</p>
-          <div className="space-y-2">
-            <p className="text-sm text-gray-500">Language: {book.language}</p>
-            {book.isbn && <p className="text-sm text-gray-500">ISBN: {book.isbn}</p>}
-            <p className="text-lg font-bold text-green-600">${book.price}</p>
-          </div>
-          <p className="mt-4 text-gray-600 line-clamp-3">{book.description}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
-// NoResults Component
-const NoResults = () => (
-  <div className="text-center py-12">
-    <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-    <h3 className="text-lg font-medium text-gray-900 mb-2">No books found</h3>
-    <p className="text-gray-600">Try adjusting your search terms</p>
-  </div>
-);
-
-// BookSearch Component
-const BookSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [books, setBooks] = useState([]);
+const SearchBar = () => {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedFilter, setSelectedFilter] = useState('all');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const timeoutRef = useRef(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const debounceTimeout = useRef(null);
 
-  // API call to search books
-  const searchBooks = async () => {
+  const fetchSearchResults = async (searchQuery) => {
+    if (!searchQuery?.trim()) {
+      setResults([]);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    
     try {
-      setLoading(true);
-      setError(null);
+      // Updated endpoint to match backend route structure
+      const response = await fetch(`/api/v1/books/search?q=${encodeURIComponent(searchQuery.trim())}`);
       
-      const response = await api.get(`/books/search?q=${searchTerm}`);
-      
-      if (Array.isArray(response.data)) {
-        setBooks(response.data);
-      } else if (response.data.books) {
-        setBooks(response.data.books);
-      } else {
-        setError('No results found');
-        setBooks([]);
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || `Error: ${response.status}`);
+        } else {
+          throw new Error(`Server error: ${response.status}`);
+        }
       }
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch books');
-      setBooks([]);
+      
+      const data = await response.json();
+      setResults(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setError(error.message);
+      setResults([]);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (searchTerm) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(searchBooks, 500);
-    } else {
-      setBooks([]);
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
     }
 
-    return () => clearTimeout(timeoutRef.current);
-  }, [searchTerm]);
+    if (value.trim() !== "") {
+      debounceTimeout.current = setTimeout(() => {
+        fetchSearchResults(value);
+      }, 300);
+    } else {
+      setResults([]);
+    }
+  };
 
-  const filteredBooks = books.filter(book => {
-    if (selectedFilter === 'all') return true;
-    return book[selectedFilter]?.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-
-  const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
-
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  useEffect(() => {
+    return () => {
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
+      }
+    };
+  }, []);
 
   return (
-    <div className="max-w-7xl ">
-      {/* Search Icon Button */}
-       <div className="relative flex-1">
-    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-      <Search className="h-5 w-5 text-gray-400" />
-    </div>
-    <input
-    onClick={openModal}
-      type="text"
-      placeholder="Search books by name, author, language, or ISBN..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="w-full pl-10 pr-4 py-3 border border-gray-300 bg-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent  shadow-sm placeholder-gray-400"
-      aria-label="Search books"
-    />
-    {loading && (
-      <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-        <Loader2 className="h-5 w-5 text-gray-400 animate-spin" />
+    <div className="relative w-full lg:w-1/2">
+      <input
+        type="text"
+        placeholder="Search books..."
+        className="input input-bordered w-full rounded-md px-4 py-2"
+        value={query}
+        onChange={handleInputChange}
+      />
+
+      <div className="absolute top-3 right-4">
+        {loading ? (
+          <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-gray-400" />
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-5 h-5 text-gray-400"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-4.35-4.35m1.68-5.52a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
+            />
+          </svg>
+        )}
       </div>
-    )}
-  </div>
 
-      {/* Modal Popup for Search */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
-          <div className="bg-white rounded-lg p-6 w-full md:w-1/2 max-h-[80vh] overflow-y-auto bg-opacity-90 backdrop-blur-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-gray-900">Search Books</h2>
-              <button onClick={closeModal} className="text-gray-500 text-xl">
-                <X className="h-5 w-5" />
-              </button>
+      {query && (
+        <div className="absolute top-12 left-0 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-80 overflow-y-auto z-50">
+          {loading && (
+            <div className="p-4 text-center text-gray-500">
+              <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-500 mx-auto mb-2" />
+              <p>Searching...</p>
             </div>
-
-            {/* Search Bar */}
-            <div className="mb-6">
-              <div className="flex gap-4">
-                <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} loading={loading} />
-                <Dropdown 
-                  selectedFilter={selectedFilter} 
-                  setSelectedFilter={setSelectedFilter} 
-                  open={dropdownOpen} 
-                  toggleDropdown={toggleDropdown} 
-                />
-              </div>
+          )}
+          
+          {error && (
+            <div className="p-4 text-center text-red-500">
+              <p>{error}</p>
             </div>
+          )}
+          
+          {!loading && !error && results.length === 0 && query && (
+            <div className="p-4 text-center text-gray-500">
+              <p>No books found</p>
+            </div>
+          )}
 
-            {/* Error Message */}
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6">
-                {error}
+          {!loading && !error && results.map((book) => (
+            <Link
+              to={`/books/${book._id}`}
+              key={book._id || book.id}
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-16 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
+                  {book.url ? (
+                    <img
+                      src={book.url}
+                      alt={book.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/placeholder-book.png";
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <svg
+                        className="w-6 h-6 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm truncate">{book.name}</p>
+                  <p className="text-gray-500 text-sm truncate">{book.author}</p>
+                  {book.language && (
+                    <p className="text-gray-400 text-xs">{book.language}</p>
+                  )}
+                  {book.price && (
+                    <p className="text-red-500 font-semibold text-sm">
+                      ₹{typeof book.price === 'number' ? book.price.toFixed(2) : book.price}
+                    </p>
+                  )}
+                </div>
               </div>
-            )}
-
-            {/* Results Count */}
-            {searchTerm && !loading && filteredBooks.length > 0 && (
-              <div className="mb-6">
-                <p className="text-gray-600">
-                  Found {filteredBooks.length} {filteredBooks.length === 1 ? 'book' : 'books'}
-                </p>
-              </div>
-            )}
-
-            {/* Books Grid */}
-            {filteredBooks.length > 0 ? (
-              <BookGrid books={filteredBooks} />
-            ) : searchTerm && !loading ? (
-              <NoResults />
-            ) : null}
-          </div>
+            </Link>
+          ))}
         </div>
       )}
     </div>
   );
 };
 
-export default BookSearch;
+export default SearchBar;

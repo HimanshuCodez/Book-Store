@@ -11,6 +11,7 @@ import Adult from "../components/BookCategory.jsx/Adult";
 import Kdrama from "../components/BookCategory.jsx/Kdrama";
 
 
+
 const Home = () => {
   return (
     <>
@@ -18,6 +19,8 @@ const Home = () => {
    
 
       <Navbar />
+     
+      
       <Banner />
       <RecentlyAdded />
       <Kdrama/>

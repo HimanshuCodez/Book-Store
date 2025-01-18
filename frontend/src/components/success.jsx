@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import gifss  from '../../public/gifss.gif'
+import gifss from "../../public/gifss.gif";
 
 const Success = () => {
   const location = useLocation();
